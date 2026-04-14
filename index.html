@@ -300,49 +300,67 @@ async function subir(file, tipo, progBarId, progWrapId) {
 }
 
 async function guardar() {
-  $("saveLoad").style.display = "flex";
-  $("saveBtn").disabled = true;
-  $("saveMsg").style.display = "none";
+  const saveBtn = $("saveBtn");
+  const saveLoad = $("saveLoad");
+  const saveMsg = $("saveMsg");
+
+  saveLoad.style.display = "flex";
+  saveBtn.disabled = true;
+  saveMsg.style.display = "none";
+
+  // 1. Recolectar datos actuales del formulario
+  const camposFinales = {};
+  CAMPOS.forEach(c => {
+    const el = $("f_" + c);
+    if (el) camposFinales[c] = el.value.trim();
+  });
 
   try {
-    // 1. Procesar archivos si existen
+    // 2. Subir FOTO y capturar la URL
     if ($("fotoFile").files[0]) {
-      const r = await subir($("fotoFile").files[0], "foto", "fotoProgBar", "fotoProgWrap");
-      if (r.ok) $("f_FOTO").value = r.url;
+      $("saveLoadTxt").textContent = "Subiendo fotografía...";
+      const resFoto = await subir($("fotoFile").files[0], "foto", "fotoProgBar", "fotoProgWrap");
+      if (resFoto.ok) {
+        camposFinales["FOTO"] = resFoto.url; // <--- CRUCIAL: Guarda la URL en el objeto
+        if($("f_FOTO")) $("f_FOTO").value = resFoto.url;
+      }
     }
+
+    // 3. Subir HV y capturar la URL
     if ($("hvFile").files[0]) {
-      const r = await subir($("hvFile").files[0], "hv", "hvProgBar", "hvProgWrap");
-      if (r.ok) $("f_HOJA_DE_VIDA").value = r.url;
+      $("saveLoadTxt").textContent = "Subiendo Hoja de Vida...";
+      const resHV = await subir($("hvFile").files[0], "hv", "hvProgBar", "hvProgWrap");
+      if (resHV.ok) {
+        camposFinales["HOJA_DE_VIDA"] = resHV.url; // <--- CRUCIAL: Guarda la URL en el objeto
+        if($("f_HOJA_DE_VIDA")) $("f_HOJA_DE_VIDA").value = resHV.url;
+      }
     }
 
-    // 2. Recolectar campos para el Sheet
-    const campos = {};
-    CAMPOS.forEach(c => { if($("f_"+c)) campos[c] = $("f_"+c).value.trim(); });
-
-    // 3. Envío final por POST
-    const res = await apiCall({
+    // 4. Enviar TODO (campos de texto + URLs de archivos) a Google Sheets
+    $("saveLoadTxt").textContent = "Sincronizando con Google Sheets...";
+    const resSheet = await apiCall({
       action: "actualizar",
       fila: filaActual,
-      campos: campos // El objeto va directo al cuerpo del POST
+      campos: camposFinales // Aquí ya van incluidas las URLs
     });
 
-    if (res.ok) {
-      $("saveMsg").textContent = "✓ Información actualizada correctamente.";
-      $("saveMsg").className = "msg msg-ok";
-      $("saveMsg").style.display = "block";
-      alert("¡Éxito! Los cambios se han guardado en la hoja de cálculo.");
+    if (resSheet.ok) {
+      saveMsg.textContent = "✓ ¡Perfil y archivos actualizados con éxito!";
+      saveMsg.className = "msg msg-ok";
+      saveMsg.style.display = "block";
+      alert("La información se ha guardado correctamente.");
     } else {
-      throw new Error(res.msg);
+      throw new Error(resSheet.msg);
     }
-  } catch(e) {
-    $("saveMsg").textContent = "Error al intentar guardar los cambios.";
-    $("saveMsg").className = "msg msg-err";
-    $("saveMsg").style.display = "block";
+
+  } catch (e) {
+    saveMsg.textContent = "Error: " + e.message;
+    saveMsg.className = "msg msg-err";
+    saveMsg.style.display = "block";
   } finally {
-    $("saveLoad").style.display = "none";
-    $("saveBtn").disabled = false;
-    $("fotoProgWrap").style.display = "none";
-    $("hvProgWrap").style.display = "none";
+    saveLoad.style.display = "none";
+    saveBtn.disabled = false;
+    $("saveLoadTxt").textContent = "Guardar Cambios";
   }
 }
 </script>
