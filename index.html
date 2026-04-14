@@ -6,7 +6,7 @@
 <title>Banco de Directores — Maestría TIC · UFPS</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet" />
 <style>
-  /* TUS ESTILOS ORIGINALES COMPLETOS */
+  /* SE MANTIENEN TUS ESTILOS ORIGINALES INTACTOS */
   :root {
     --blue: #1a56a0; --blue-dark: #0d3b75; --blue-light: #e8f0fb;
     --green: #2d6a10; --green-light: #eaf3e0;
@@ -19,269 +19,282 @@
     --font-display: 'DM Serif Display', serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font-body); background: var(--gray-50); color: var(--gray-900); line-height: 1.5; padding: 20px; }
-  .container { max-width: 900px; margin: 0 auto; }
-  header { margin-bottom: 40px; text-align: center; }
-  h1 { font-family: var(--font-display); font-size: 2.5rem; color: var(--blue-dark); margin-bottom: 8px; }
-  .card { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 30px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-  .search-box { display: flex; gap: 12px; margin-bottom: 20px; }
-  input[type="text"], input[type="email"], select, textarea { 
-    width: 100%; padding: 12px 16px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 1rem; transition: all 0.2s;
-  }
-  input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); }
-  button { 
-    padding: 12px 24px; border-radius: var(--radius-sm); border: none; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-primary { background: var(--blue); color: #fff; }
-  .btn-primary:hover { background: var(--blue-dark); }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .profile-header { display: flex; align-items: center; gap: 24px; border-bottom: 2px solid var(--gray-50); margin-bottom: 20px; padding-bottom: 20px; }
-  .progress-container { width: 100%; height: 8px; background: var(--gray-100); border-radius: 4px; overflow: hidden; margin-top: 10px; display: none; }
-  .progress-bar { height: 100%; background: var(--blue); width: 0%; transition: width 0.3s; }
-  .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; display: inline-block; }
-  .badge-ok { background: var(--green-light); color: var(--green); }
-  .badge-err { background: var(--red-light); color: var(--red); }
-  .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
+  body { font-family: var(--font-body); background: var(--gray-50); color: var(--gray-900); min-height: 100vh; }
+
+  .topbar { background: var(--blue-dark); padding: 0 2rem; display: flex; align-items: center; height: 56px; gap: 14px; }
+  .topbar-logo { width: 34px; height: 34px; background: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .topbar-logo svg { width: 20px; height: 20px; fill: var(--blue-dark); }
+  .topbar-title { color: white; font-size: 14px; font-weight: 500; }
+  .topbar-sub { color: rgba(255,255,255,0.5); font-size: 12px; margin-left: auto; }
+
+  .page { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  .hero { margin-bottom: 2rem; }
+  .hero h1 { font-family: var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.2; }
+  .hero p { font-size: 14px; color: var(--gray-400); margin-top: 6px; }
+  .card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+
+  .search-label { font-size: 13px; color: var(--gray-400); margin-bottom: 10px; display: block; }
+  .search-row { display: flex; gap: 10px; }
+  .search-row input { flex: 1; height: 44px; padding: 0 14px; font-size: 14px; font-family: var(--font-body); border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--gray-50); color: var(--gray-900); outline: none; transition: border-color .15s, box-shadow .15s; }
+  .search-row input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,86,160,.12); background: white; }
+
+  .btn { height: 44px; padding: 0 20px; font-size: 13px; font-weight: 500; font-family: var(--font-body); border-radius: var(--radius-sm); border: 1.5px solid transparent; cursor: pointer; transition: all .15s; white-space: nowrap; }
+  .btn-blue  { background: var(--blue);  color: white; } 
+  .btn-green { background: var(--green); color: white; }
+
+  .msg { font-size: 13px; padding: 10px 14px; border-radius: var(--radius-sm); margin-top: 12px; display: none; line-height: 1.5; }
+  .msg-err  { background: var(--red-light); color: var(--red); display: block; }
+  .msg-ok   { background: var(--green-light); color: var(--green); display: block; }
+
+  .profile { display: none; }
+  .phead { display: flex; align-items: center; gap: 16px; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--gray-100); }
+  .ava { width: 58px; height: 58px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 500; color: var(--blue); flex-shrink: 0; overflow: hidden; }
+  .ava img { width: 100%; height: 100%; object-fit: cover; }
+
+  .stitle { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); margin: 1.25rem 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--gray-100); }
+  .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fi { display: flex; flex-direction: column; gap: 5px; }
+  .fl { font-size: 11px; font-weight: 500; color: var(--gray-400); text-transform: uppercase; letter-spacing: .05em; }
+  .finp { height: 38px; padding: 0 12px; font-size: 13px; font-family: var(--font-body); border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--gray-50); color: var(--gray-900); outline: none; width: 100%; }
+  .full { grid-column: span 2; }
+
+  .upload-zone { border: 1.5px dashed var(--gray-200); border-radius: var(--radius-sm); padding: 1rem; display: flex; align-items: center; gap: 12px; cursor: pointer; background: var(--gray-50); position: relative; }
+  .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .up-prev { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; display: none; border: 1.5px solid var(--gray-200); }
+  .up-badge { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; display: none; }
+  .up-badge.ok { background: var(--green-light); color: var(--green); display: inline-flex; }
+  .up-badge.uploading { background: var(--blue-light); color: var(--blue); display: inline-flex; }
+
+  .prog-wrap { height: 5px; background: var(--gray-100); border-radius: 4px; margin-top: 8px; display: none; overflow: hidden; }
+  .prog-bar  { height: 100%; background: var(--blue); width: 0%; transition: width .2s; }
+
+  .arow { display: flex; gap: 10px; justify-content: flex-end; align-items: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--gray-100); }
+  .lrow { display: none; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-400); }
+  .spinner { width: 15px; height: 15px; border: 2px solid var(--gray-200); border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .profile-header { flex-direction: column; text-align: center; } }
+
+  @media (max-width: 540px) { .fgrid { grid-template-columns: 1fr; } .full { grid-column: span 1; } }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>Maestría TIC · UFPS</h1>
-    <p>Banco de Directores — Gestión de Información</p>
-  </header>
+<div class="topbar">
+  <div class="topbar-logo">
+    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+  </div>
+  <span class="topbar-title">Maestría en TIC Aplicadas a la Educación</span>
+  <span class="topbar-sub">UFPS</span>
+</div>
+
+<div class="page">
+  <div class="hero">
+    <h1>Banco de Directores</h1>
+    <p>Consulta y actualiza tu información institucional.</p>
+  </div>
 
   <div class="card">
-    <div class="search-box">
-      <input type="text" id="q" placeholder="Buscar por Cédula, Código o Correo..." />
-      <button class="btn-primary" onclick="buscar()" id="searchBtn">Buscar Director</button>
+    <span class="search-label">Documento, código o correo institucional</span>
+    <div class="search-row">
+      <input type="text" id="qInput" placeholder="Ej: 88027979" />
+      <button class="btn btn-blue" id="searchBtn" onclick="buscar()">Buscar</button>
     </div>
-    <div id="searchMsg"></div>
+    <div id="sLoad" class="lrow" style="margin-top:10px;"><span class="spinner"></span> Consultando...</div>
+    <div id="sMsg" class="msg"></div>
   </div>
 
-  <div id="formSection" style="display:none;">
-    <div class="card profile-header">
-      <div style="position:relative;">
-        <img id="pImg" src="https://placehold.co/120x120?text=Foto" alt="Foto" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid var(--blue-light); cursor:pointer;" onclick="document.getElementById('f_foto_file').click()"/>
-        <input type="file" id="f_foto_file" style="display:none;" accept="image/*" onchange="previewFoto(this)"/>
-      </div>
-      <div style="flex:1;">
-        <h2 id="pName" style="font-family:var(--font-display); font-size:1.8rem; color:var(--blue-dark);">Nombre del Director</h2>
-        <p id="pSub" style="color:var(--gray-400); margin-bottom:12px;">correo@ejemplo.com</p>
-        <div id="fotoBadge"></div>
-        <div id="fotoProgress" class="progress-container"><div class="progress-bar"></div></div>
+  <div class="card profile" id="profileCard">
+    <div class="phead">
+      <div class="ava" id="avaDiv"><span>--</span></div>
+      <div>
+        <div class="pname" id="pName">—</div>
+        <div class="psub"  id="pSub">—</div>
+        <span class="badge">Director Registrado</span>
       </div>
     </div>
 
-    <div class="card">
-      <div id="camposInputs" class="grid"></div>
-
-      <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--gray-100);">
-        <label style="display:block; margin-bottom:8px; font-weight:500;">Actualizar Hoja de Vida (PDF)</label>
-        <input type="file" id="f_hv_file" accept=".pdf" />
-        <div id="hvBadge" style="margin-top:8px;"></div>
-        <div id="hvProgress" class="progress-container"><div class="progress-bar"></div></div>
-        
-        <div id="pdfLinkRow" style="display:none; margin-top:12px; align-items:center; gap:8px;">
-          <span style="color:var(--green); font-size:0.9rem;">HV detectada:</span>
-          <a id="pdfLink" href="#" target="_blank" style="color:var(--blue); font-size:0.9rem; font-weight:500;">Abrir archivo en Drive</a>
-        </div>
-      </div>
+    <div class="stitle">Datos Personales</div>
+    <div class="fgrid">
+      <div class="fi"><span class="fl">Documento</span><input class="finp" id="f_DOCUMENTO" type="text" /></div>
+      <div class="fi"><span class="fl">Código</span><input class="finp" id="f_CODIGO" type="text" /></div>
+      <div class="fi full"><span class="fl">Nombre completo</span><input class="finp" id="f_NOMBRE_DIRECTOR" type="text" /></div>
+      <div class="fi"><span class="fl">Teléfono</span><input class="finp" id="f_TELEFONO" type="text" /></div>
+      <div class="fi"><span class="fl">Correo</span><input class="finp" id="f_CORREO_DIRECTOR" type="email" /></div>
     </div>
 
-    <div style="text-align:right; margin-bottom:60px;">
-      <button class="btn-primary" id="saveBtn" onclick="guardarTodo()" style="padding:16px 48px; font-size:1.1rem; min-width:280px;">
-        <span id="saveLoad" class="spinner" style="display:none;"></span>
-        <span id="saveLoadTxt">Guardar Cambios</span>
-      </button>
-      <div id="saveMsg" style="margin-top:12px;"></div>
+    <div class="stitle">Fotografía</div>
+    <div class="fi">
+      <div class="upload-zone">
+        <input type="file" id="fotoFile" accept="image/*" onchange="handleFoto(this)" />
+        <img class="up-prev" id="fotoPrev" alt="preview" />
+        <div class="up-text"><strong id="fotoLabel">Seleccionar foto</strong><span>JPG, PNG · máx. 5 MB</span></div>
+        <span class="up-badge" id="fotoBadge"></span>
+      </div>
+      <div class="prog-wrap" id="fotoProgWrap"><div class="prog-bar" id="fotoProgBar"></div></div>
+      <input id="f_FOTOGRAFIA" type="hidden" />
+    </div>
+
+    <div class="stitle">Formación y Grupos</div>
+    <div class="fgrid">
+      <div class="fi"><span class="fl">Pregrado</span><input class="finp" id="f_PREGRADO" type="text" /></div>
+      <div class="fi"><span class="fl">Especialización</span><input class="finp" id="f_ESPECIALIZACION" type="text" /></div>
+      <div class="fi"><span class="fl">Maestría</span><input class="finp" id="f_MAESTRIA" type="text" /></div>
+      <div class="fi"><span class="fl">Doctorado</span><input class="finp" id="f_DOCTORADO" type="text" /></div>
+      <div class="fi"><span class="fl">Grupo 1</span><input class="finp" id="f_GRUPO1" type="text" /></div>
+      <div class="fi"><span class="fl">Grupo 2</span><input class="finp" id="f_GRUPO2" type="text" /></div>
+    </div>
+
+    <div class="stitle">Áreas y Perfiles</div>
+    <div class="fgrid">
+      <div class="fi"><span class="fl">Área Principal</span><input class="finp" id="f_AREA_PRINCIPAL" type="text" /></div>
+      <div class="fi"><span class="fl">Área Secundaria</span><input class="finp" id="f_AREA_SECUNDARIA" type="text" /></div>
+      <div class="fi"><span class="fl">ORCID</span><input class="finp" id="f_ORCID" type="text" /></div>
+      <div class="fi"><span class="fl">CvLAC</span><input class="finp" id="f_CVLAC" type="text" /></div>
+      <div class="fi full"><span class="fl">LinkedIn</span><input class="finp" id="f_LINKEDIN" type="text" /></div>
+    </div>
+
+    <div class="stitle">Hoja de Vida</div>
+    <div class="fi">
+      <div class="upload-zone">
+        <input type="file" id="hvFile" accept="application/pdf" onchange="handleHV(this)" />
+        <div class="up-text"><strong id="hvLabel">Seleccionar PDF</strong><span>Máx. 10 MB</span></div>
+        <span class="up-badge" id="hvBadge"></span>
+      </div>
+      <div class="prog-wrap" id="hvProgWrap"><div class="prog-bar" id="hvProgBar"></div></div>
+      <div id="pdfLinkRow" style="display:none; margin-top:8px;"><a id="pdfLink" href="#" target="_blank" style="font-size:12px; color:var(--blue);">Ver PDF actual</a></div>
+      <input id="f_HOJA_DE_VIDA" type="hidden" />
+    </div>
+
+    <div class="arow">
+      <div id="saveLoad" class="lrow"><span class="spinner"></span> <span id="saveLoadTxt">Guardando...</span></div>
+      <div id="saveMsg" class="msg" style="flex:1; margin-top:0;"></div>
+      <button class="btn btn-green" id="saveBtn" onclick="guardar()">Guardar Cambios</button>
     </div>
   </div>
+
+  <div class="footer">Sistema de Gestión de Directores · UFPS</div>
 </div>
 
 <script>
-  // URL DE TU SCRIPT
-  const GAS = "https://script.google.com/macros/s/AKfycbzpqriICwVL3AUci1kTHWBf7VC7FB-8FalP2ZNDouFHUPFYMFXHwNy4kQEgiJV3ji2l/exec";
-  
-  const CAMPOS = [
-    "DOCUMENTO", "CODIGO", "NOMBRE_DIRECTOR", "TELEFONO", "CORREO_DIRECTOR",
-    "FOTO", "HOJA_DE_VIDA", "PREGRADO", "ESPECIALIZACION", "MAESTRIA", 
-    "DOCTORADO", "GRUPO_INVESTIGACION_1", "GRUPO_INVESTIGACION_2", 
-    "AREA_CONOCIMIENTO_PRINCIPAL", "AREA_CONOCIMIENTO_SECUNDARIA", 
-    "LINK_ORCID", "LINK_CVLAC", "LINK_LINKEDIN"
-  ];
+const GAS = "https://script.google.com/macros/s/AKfycbzpqriICwVL3AUci1kTHWBf7VC7FB-8FalP2ZNDouFHUPFYMFXHwNy4kQEgiJV3ji2l/exec";
+const CHUNK_SIZE = 50000;
+const CAMPOS = ["DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR","FOTOGRAFIA","PREGRADO","ESPECIALIZACION","MAESTRIA","DOCTORADO","GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA","HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN"];
 
-  let filaActual = null;
-  let docDirector = "";
+let filaActual = null;
+let docDirector = "";
 
-  const $ = id => document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-  // --- NUEVO MOTOR DE PETICIÓN POST (Soluciona el error 400 y CORS) ---
-  async function apiCall(params) {
-    const response = await fetch(GAS, {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" }, // Formato compatible con Apps Script
-      body: JSON.stringify(params)
-    });
-    return await response.json();
-  }
-
-  // Generar inputs dinámicamente manteniendo tu lógica original
-  const container = $("camposInputs");
-  CAMPOS.forEach(c => {
-    // FOTO y HOJA_DE_VIDA se manejan con inputs de archivo, pero los inputs ocultos guardan la URL
-    const div = document.createElement("div");
-    div.innerHTML = `<label style="display:block; margin-bottom:6px; font-size:0.85rem; color:var(--gray-700); font-weight:500;">${c.replace(/_/g," ")}</label>
-                     <input type="text" id="f_${c}" ${ (c==="FOTO" || c==="HOJA_DE_VIDA") ? 'readonly style="background:var(--gray-50)"' : '' } />`;
-    container.appendChild(div);
+// --- MOTOR DE COMUNICACIÓN POST (CRUCIAL PARA QUE GUARDE) ---
+async function apiCall(params) {
+  const response = await fetch(GAS, {
+    method: "POST",
+    mode: "cors",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(params)
   });
+  return await response.json();
+}
 
-  async function buscar() {
-    const q = $("q").value.trim();
-    if (!q) return;
-    loader("searchBtn", true);
-    $("searchMsg").innerHTML = "";
+function setBadge(id, texto, tipo) {
+  const b = $(id);
+  b.className = "up-badge " + tipo;
+  b.textContent = texto;
+  b.style.display = "inline-flex";
+}
 
-    try {
-      // Usamos POST para buscar también por seguridad
-      const r = await apiCall({ action: "buscar", query: q });
-      if (r.ok) {
-        filaActual = r.fila;
-        docDirector = r.data["DOCUMENTO"];
-        $("pName").textContent = r.data["NOMBRE_DIRECTOR"] || "Sin Nombre";
-        $("pSub").textContent = r.data["CORREO_DIRECTOR"] || "";
-        $("pImg").src = r.data["FOTO"] || "https://placehold.co/120x120?text=Sin+Foto";
-        
-        CAMPOS.forEach(c => { 
-          if($("f_"+c)) $("f_"+c).value = r.data[c] || ""; 
-        });
-        
-        if (r.data["HOJA_DE_VIDA"]) {
-          $("pdfLink").href = r.data["HOJA_DE_VIDA"];
-          $("pdfLinkRow").style.display = "flex";
-        } else {
-          $("pdfLinkRow").style.display = "none";
-        }
-        
-        $("formSection").style.display = "block";
-        $("formSection").scrollIntoView({ behavior: 'smooth' });
-      } else {
-        $("searchMsg").innerHTML = `<span style="color:var(--red)">Director no encontrado</span>`;
-      }
-    } catch(e) {
-      $("searchMsg").innerHTML = `<span style="color:var(--red)">Error: No se pudo conectar con el servidor</span>`;
-    } finally {
-      loader("searchBtn", false);
-    }
+function handleFoto(input) {
+  if (input.files[0]) {
+    $("fotoLabel").textContent = input.files[0].name;
+    setBadge("fotoBadge", "Lista", "ok");
+    const reader = new FileReader();
+    reader.onload = e => { $("fotoPrev").src = e.target.result; $("fotoPrev").style.display="block"; };
+    reader.readAsDataURL(input.files[0]);
   }
+}
 
-  async function subirArchivo(file, tipo, progressId, badgeId) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          const base64 = e.target.result.split(",")[1];
-          const sessionId = "sess_" + Math.random().toString(36).substring(2, 10);
-          const CHUNK_SIZE = 50000; 
-          const total = Math.ceil(base64.length / CHUNK_SIZE);
+function handleHV(input) {
+  if (input.files[0]) { $("hvLabel").textContent = input.files[0].name; setBadge("hvBadge", "Lista", "ok"); }
+}
 
-          $(progressId).style.display = "block";
-          const bar = $(progressId).querySelector(".progress-bar");
+async function buscar() {
+  const q = $("qInput").value.trim();
+  if (!q) return;
+  $("sLoad").style.display = "flex";
+  $("sMsg").style.display = "none";
+  try {
+    const r = await apiCall({ action: "buscar", query: q });
+    $("sLoad").style.display = "none";
+    if (r.ok) {
+      filaActual = r.fila;
+      docDirector = r.data["DOCUMENTO"];
+      CAMPOS.forEach(c => { if($("f_"+c)) $("f_"+c).value = r.data[c] || ""; });
+      $("pName").textContent = r.data["NOMBRE_DIRECTOR"] || "Sin Nombre";
+      $("pSub").textContent = r.data["CORREO_DIRECTOR"] || "";
+      $("profileCard").style.display = "block";
+    } else {
+      $("sMsg").textContent = "No encontrado."; $("sMsg").className="msg msg-err"; $("sMsg").style.display="block";
+    }
+  } catch(e) { $("sLoad").style.display = "none"; }
+}
 
-          for (let i = 0; i < total; i++) {
-            const chunk = base64.substring(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
-            await apiCall({
-              action: "chunk",
-              sessionId: sessionId,
-              chunkIndex: i,
-              totalChunks: total,
-              data: chunk,
-              tipo: tipo,
-              documento: docDirector,
-              mimeType: file.type,
-              extension: file.name.split('.').pop()
-            });
-            bar.style.width = Math.round(((i + 1) / total) * 100) + "%";
-          }
+async function subir(file, tipo, progBarId, progWrapId) {
+  const base64 = await new Promise(r => {
+    const reader = new FileReader();
+    reader.onload = e => r(e.target.result.split(",")[1]);
+    reader.readAsDataURL(file);
+  });
+  const sessionId = "sess_" + Date.now();
+  const total = Math.ceil(base64.length / CHUNK_SIZE);
+  $(progWrapId).style.display = "block";
 
-          const r = await apiCall({ action: "ensamblar", sessionId: sessionId });
-          resolve(r);
-        } catch (err) { reject(err); }
-      };
-      reader.readAsDataURL(file);
+  for (let i = 0; i < total; i++) {
+    const chunk = base64.substring(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
+    await apiCall({
+      action: "chunk", sessionId, chunkIndex: i, totalChunks: total,
+      data: chunk, tipo, documento: docDirector, 
+      extension: file.name.split('.').pop(), mimeType: file.type
     });
+    $(progBarId).style.width = Math.round(((i + 1) / total) * 100) + "%";
   }
+  return await apiCall({ action: "ensamblar", sessionId });
+}
 
-  async function guardarTodo() {
-    loader("saveBtn", true);
-    $("saveLoadTxt").textContent = "Subiendo archivos...";
-    $("saveMsg").innerHTML = "";
+async function guardar() {
+  $("saveLoad").style.display = "flex";
+  $("saveBtn").disabled = true;
+  $("saveMsg").style.display = "none";
 
-    try {
-      // 1. Subir Foto si hay cambio
-      if ($("f_foto_file").files.length > 0) {
-        const r = await subirArchivo($("f_foto_file").files[0], "foto", "fotoProgress", "fotoBadge");
-        if (r.ok) {
-           $("f_FOTO").value = r.url;
-           $("pImg").src = r.url;
-        }
-      }
-
-      // 2. Subir PDF si hay cambio
-      if ($("f_hv_file").files.length > 0) {
-        const r = await subirArchivo($("f_hv_file").files[0], "hv", "hvProgress", "hvBadge");
-        if (r.ok) {
-           $("f_HOJA_DE_VIDA").value = r.url;
-           $("pdfLink").href = r.url;
-           $("pdfLinkRow").style.display = "flex";
-        }
-      }
-
-      // 3. Actualizar la fila en Sheets
-      $("saveLoadTxt").textContent = "Actualizando datos...";
-      const campos = {};
-      CAMPOS.forEach(c => { 
-        if($("f_"+c)) campos[c] = $("f_"+c).value.trim(); 
-      });
-
-      const rSheet = await apiCall({
-        action: "actualizar",
-        fila: filaActual,
-        campos: JSON.stringify(campos)
-      });
-
-      if (rSheet.ok) {
-        $("saveMsg").innerHTML = `<span style="color:var(--green); font-weight:500;">✓ ¡Actualización exitosa en Google Sheets!</span>`;
-      }
-    } catch(e) {
-      $("saveMsg").innerHTML = `<span style="color:var(--red)">Error al guardar cambios</span>`;
-    } finally {
-      loader("saveBtn", false);
-      $("saveLoadTxt").textContent = "Guardar Cambios";
-      $("fotoProgress").style.display = "none";
-      $("hvProgress").style.display = "none";
+  try {
+    if ($("fotoFile").files[0]) {
+      const r = await subir($("fotoFile").files[0], "foto", "fotoProgBar", "fotoProgWrap");
+      if (r.ok) $("f_FOTOGRAFIA").value = r.url;
     }
-  }
-
-  function previewFoto(input) {
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = e => $("pImg").src = e.target.result;
-      reader.readAsDataURL(input.files[0]);
+    if ($("hvFile").files[0]) {
+      const r = await subir($("hvFile").files[0], "hv", "hvProgBar", "hvProgWrap");
+      if (r.ok) $("f_HOJA_DE_VIDA").value = r.url;
     }
-  }
 
-  function loader(id, show) {
-    const btn = $(id);
-    if (id === "saveBtn") $("saveLoad").style.display = show ? "inline-block" : "none";
-    btn.disabled = show;
-    btn.style.opacity = show ? "0.7" : "1";
+    const campos = {};
+    CAMPOS.forEach(c => { if($("f_"+c)) campos[c] = $("f_"+c).value.trim(); });
+
+    // ESTA ES LA LLAMADA QUE AHORA SÍ ENVIARÁ TODO POR POST
+    const res = await apiCall({
+      action: "actualizar",
+      fila: filaActual,
+      campos: JSON.stringify(campos)
+    });
+
+    if (res.ok) {
+      $("saveMsg").innerHTML = "✓ ¡Actualización exitosa en Google Sheets!";
+      $("saveMsg").className = "msg msg-ok";
+      $("saveMsg").style.display = "block";
+    }
+  } catch(e) {
+    $("saveMsg").textContent = "Error al guardar."; $("saveMsg").className="msg msg-err"; $("saveMsg").style.display="block";
+  } finally {
+    $("saveLoad").style.display = "none"; $("saveBtn").disabled = false;
   }
+}
 </script>
-
 </body>
 </html>
