@@ -28,37 +28,60 @@
   .hero h1{font-family:var(--font-display);font-size:28px;font-weight:400;line-height:1.2;}
   .hero p{font-size:14px;color:var(--gray-400);margin-top:6px;}
   .card{background:white;border:1px solid var(--gray-200);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem;}
+
+  /* ── Búsqueda ── */
   .search-label{font-size:13px;color:var(--gray-400);margin-bottom:10px;display:block;}
   .search-row{display:flex;gap:10px;}
   .search-row input{flex:1;height:44px;padding:0 14px;font-size:14px;font-family:var(--font-body);border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--gray-50);color:var(--gray-900);outline:none;transition:border-color .15s,box-shadow .15s;}
   .search-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,160,.12);background:white;}
   .search-row input::placeholder{color:var(--gray-400);}
+
+  /* ── Botones ── */
   .btn{height:44px;padding:0 20px;font-size:13px;font-weight:500;font-family:var(--font-body);border-radius:var(--radius-sm);border:1.5px solid transparent;cursor:pointer;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;}
   .btn-blue{background:var(--blue);color:white;}.btn-blue:hover{background:var(--blue-dark);}.btn-blue:disabled{opacity:.45;cursor:not-allowed;}
   .btn-ghost{background:white;color:var(--gray-700);border-color:var(--gray-200);}.btn-ghost:hover{background:var(--gray-50);}
   .btn-green{background:var(--green);color:white;}.btn-green:hover{background:#1f4d0c;}.btn-green:disabled{opacity:.45;cursor:not-allowed;}
+  .btn-orange{background:var(--orange);color:white;border:none;}.btn-orange:hover{background:#c9701c;}.btn-orange:disabled{opacity:.45;cursor:not-allowed;}
+
+  /* ── Mensajes ── */
   .msg{font-size:13px;padding:10px 14px;border-radius:var(--radius-sm);margin-top:12px;display:none;line-height:1.5;}
   .msg-err{background:var(--red-light);color:var(--red);display:block;}
   .msg-ok{background:var(--green-light);color:var(--green);display:block;}
   .msg-warn{background:var(--orange-light);color:var(--orange);display:block;}
+
+  /* ── Bloque "No encontrado" con botón Crear ── */
+  .not-found-box{display:none;margin-top:14px;padding:16px;border-radius:var(--radius-sm);background:var(--orange-light);border:1.5px solid #f0c080;}
+  .not-found-box p{font-size:13px;color:#7a4f10;margin-bottom:12px;line-height:1.5;}
+  .not-found-box strong{color:#5a3800;}
+
+  /* ── Spinner ── */
   .lrow{display:none;align-items:center;gap:8px;font-size:13px;color:var(--gray-400);margin-top:12px;}
   .spinner{width:15px;height:15px;border:2px solid var(--gray-200);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
   @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ── Perfil / Formulario ── */
   .profile{display:none;}
+  .form-mode-banner{display:none;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--orange-light);border:1px solid #f0c080;margin-bottom:1.25rem;font-size:13px;color:#7a4f10;}
+  .form-mode-banner svg{width:16px;height:16px;fill:#e67e22;flex-shrink:0;}
   .phead{display:flex;align-items:center;gap:16px;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--gray-100);}
   .ava{width:58px;height:58px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:var(--blue);flex-shrink:0;overflow:hidden;}
   .ava img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
   .pname{font-family:var(--font-display);font-size:20px;font-weight:400;}
   .psub{font-size:13px;color:var(--gray-400);margin-top:3px;}
   .badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:var(--blue-light);color:var(--blue);margin-top:5px;}
+  .badge-new{background:var(--orange-light);color:var(--orange);}
   .stitle{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin:1.25rem 0 10px;padding-bottom:6px;border-bottom:1px solid var(--gray-100);}
   .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .fi{display:flex;flex-direction:column;gap:5px;}
   .fl{font-size:11px;font-weight:500;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;}
+  .fl .req{color:var(--red);margin-left:2px;}
   .finp{height:38px;padding:0 12px;font-size:13px;font-family:var(--font-body);border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--gray-50);color:var(--gray-900);outline:none;width:100%;transition:border-color .15s,box-shadow .15s;}
   .finp:focus{border-color:var(--blue);background:white;box-shadow:0 0 0 3px rgba(26,86,160,.1);}
   .finp.url{color:var(--blue);}
+  .finp.required-field{border-color:#f0a080;}
   .full{grid-column:span 2;}
+
+  /* ── Upload ── */
   .upload-zone{border:1.5px dashed var(--gray-200);border-radius:var(--radius-sm);padding:1rem;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s,background .15s;background:var(--gray-50);position:relative;}
   .upload-zone:hover{border-color:var(--blue);background:var(--blue-light);}
   .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
@@ -81,10 +104,13 @@
   .pdf-link-row svg{width:15px;height:15px;fill:var(--red);flex-shrink:0;}
   .pdf-link-row a{font-size:12px;color:var(--red);font-weight:500;text-decoration:none;}
   .pdf-link-row a:hover{text-decoration:underline;}
+
+  /* ── Acciones ── */
   .arow{display:flex;gap:10px;justify-content:flex-end;align-items:center;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--gray-100);flex-wrap:wrap;}
   .save-msg{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;flex:1;min-width:180px;}
   .save-lbl{font-size:13px;color:var(--gray-400);}
   .footer{text-align:center;font-size:12px;color:var(--gray-400);margin-top:2rem;}
+
   @media(max-width:540px){
     .fgrid{grid-template-columns:1fr;}.full{grid-column:span 1;}
     .topbar-sub{display:none;}
@@ -99,37 +125,61 @@
   <span class="topbar-title">Maestría en TIC Aplicadas a la Educación</span>
   <span class="topbar-sub">Universidad Francisco de Paula Santander</span>
 </div>
+
 <div class="page">
   <div class="hero">
     <h1>Banco de Directores</h1>
-    <p>Consulta y actualiza tu información en el registro institucional de la maestría.</p>
+    <p>Consulta, actualiza o registra tu información en el sistema institucional de la maestría.</p>
   </div>
+
+  <!-- ── Búsqueda ── -->
   <div class="card">
-    <span class="search-label">Ingresa tu documento, código o correo institucional para cargar tu perfil</span>
+    <span class="search-label">Ingresa tu documento, código o correo institucional</span>
     <div class="search-row">
       <input type="text" id="qInput" placeholder="Ej: 12345678 · U00001 · director@ufps.edu.co" />
       <button class="btn btn-blue" id="searchBtn" onclick="buscar()">Buscar</button>
     </div>
-    <div id="sLoad" class="lrow"><span class="spinner"></span> Consultando Google Sheets...</div>
+    <div id="sLoad" class="lrow"><span class="spinner"></span> Consultando...</div>
     <div id="sMsg" class="msg"></div>
+
+    <!-- Bloque "No encontrado" -->
+    <div class="not-found-box" id="notFoundBox">
+      <p>No se encontró ningún director con <strong id="notFoundQuery"></strong> en el sistema.<br>
+      Si eres director de la Maestría TIC y aún no estás registrado, puedes crear tu perfil ahora.</p>
+      <button class="btn btn-orange" onclick="abrirRegistro()">
+        <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:white"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"/></svg>
+        Registrarme como director
+      </button>
+    </div>
   </div>
+
+  <!-- ── Formulario (edición Y registro) ── -->
   <div class="card profile" id="profileCard">
+
+    <!-- Banner modo registro -->
+    <div class="form-mode-banner" id="modeBanner">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      Estás creando un nuevo perfil. Los campos marcados con <span style="color:var(--red);font-weight:600;margin:0 3px;">*</span> son obligatorios.
+    </div>
+
     <div class="phead">
       <div class="ava" id="avaDiv"><span>--</span></div>
       <div>
-        <div class="pname" id="pName">—</div>
-        <div class="psub" id="pSub">—</div>
-        <span class="badge">Director de Maestría · UFPS</span>
+        <div class="pname" id="pName">Nuevo director</div>
+        <div class="psub" id="pSub">Completa el formulario para registrarte</div>
+        <span class="badge" id="modeBadge">Director de Maestría · UFPS</span>
       </div>
     </div>
+
     <div class="stitle">Identificación</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">Documento</span><input class="finp" id="f_DOCUMENTO" type="text"/></div>
-      <div class="fi"><span class="fl">Código</span><input class="finp" id="f_CODIGO" type="text"/></div>
-      <div class="fi"><span class="fl">Nombre completo</span><input class="finp" id="f_NOMBRE_DIRECTOR" type="text"/></div>
+      <div class="fi"><span class="fl">Documento<span class="req">*</span></span><input class="finp" id="f_DOCUMENTO" type="text" oninput="actualizarCabecera()"/></div>
+      <div class="fi"><span class="fl">Código institucional</span><input class="finp" id="f_CODIGO" type="text"/></div>
+      <div class="fi"><span class="fl">Nombre completo<span class="req">*</span></span><input class="finp" id="f_NOMBRE_DIRECTOR" type="text" oninput="actualizarCabecera()"/></div>
       <div class="fi"><span class="fl">Teléfono</span><input class="finp" id="f_TELEFONO" type="text"/></div>
-      <div class="fi full"><span class="fl">Correo</span><input class="finp" id="f_CORREO_DIRECTOR" type="email"/></div>
+      <div class="fi full"><span class="fl">Correo institucional<span class="req">*</span></span><input class="finp" id="f_CORREO_DIRECTOR" type="email" oninput="actualizarCabecera()"/></div>
     </div>
+
     <div class="stitle">Fotografía</div>
     <div class="fi">
       <span class="fl">Subir fotografía (JPG, PNG — máx. 5 MB)</span>
@@ -145,6 +195,7 @@
       </div>
       <div class="prog-wrap" id="fotoProgWrap"><div class="prog-bar" id="fotoProgBar"></div></div>
     </div>
+
     <div class="stitle">Hoja de Vida</div>
     <div class="fi">
       <span class="fl">Subir hoja de vida (PDF — máx. 10 MB)</span>
@@ -163,6 +214,7 @@
         <a id="pdfLink" href="#" target="_blank">Ver hoja de vida actual en Drive</a>
       </div>
     </div>
+
     <div class="stitle">Formación Académica</div>
     <div class="fgrid">
       <div class="fi"><span class="fl">Pregrado</span><input class="finp" id="f_PREGRADO" type="text"/></div>
@@ -170,6 +222,7 @@
       <div class="fi"><span class="fl">Maestría</span><input class="finp" id="f_MAESTRIA" type="text"/></div>
       <div class="fi"><span class="fl">Doctorado</span><input class="finp" id="f_DOCTORADO" type="text"/></div>
     </div>
+
     <div class="stitle">Grupos de Investigación</div>
     <div class="fgrid">
       <div class="fi"><span class="fl">Grupo 1</span><input class="finp" id="f_GRUPO1" type="text"/></div>
@@ -177,52 +230,103 @@
       <div class="fi"><span class="fl">Área principal</span><input class="finp" id="f_AREA_PRINCIPAL" type="text"/></div>
       <div class="fi"><span class="fl">Área secundaria</span><input class="finp" id="f_AREA_SECUNDARIA" type="text"/></div>
     </div>
+
     <div class="stitle">Perfiles Académicos</div>
     <div class="fgrid">
       <div class="fi"><span class="fl">ORCID</span><input class="finp url" id="f_ORCID" type="text" placeholder="https://orcid.org/..."/></div>
       <div class="fi"><span class="fl">CvLAC</span><input class="finp url" id="f_CVLAC" type="text" placeholder="https://scienti.minciencias..."/></div>
       <div class="fi full"><span class="fl">LinkedIn</span><input class="finp url" id="f_LINKEDIN" type="text" placeholder="https://linkedin.com/in/..."/></div>
     </div>
+
     <input id="f_FOTOGRAFIA" type="hidden"/>
     <input id="f_HOJA_DE_VIDA" type="hidden"/>
+
     <div class="arow">
       <div id="saveLoad" class="lrow"><span class="spinner"></span> <span class="save-lbl" id="saveLbl">Guardando...</span></div>
       <div id="saveMsg" class="save-msg msg"></div>
       <button class="btn btn-ghost" onclick="limpiar()">Cancelar</button>
-      <button class="btn btn-green" id="saveBtn" onclick="guardar()">Guardar cambios</button>
+      <button class="btn btn-green" id="saveBtn" onclick="guardar()">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:white"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+        <span id="saveBtnLabel">Guardar cambios</span>
+      </button>
     </div>
   </div>
+
   <div class="footer">Maestría en TIC Aplicadas a la Educación · UFPS · Sistema de gestión de directores</div>
 </div>
+
 <script>
 const GAS = "https://script.google.com/macros/s/AKfycbzpqriICwVL3AUci1kTHWBf7VC7FB-8FalP2ZNDouFHUPFYMFXHwNy4kQEgiJV3ji2l/exec";
 const CAMPOS = ["DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR","FOTOGRAFIA","PREGRADO","ESPECIALIZACION","MAESTRIA","DOCTORADO","GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA","HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN"];
-let filaActual=null, docDirector="";
-const $=id=>document.getElementById(id);
-const loader=(id,v)=>$(id).style.display=v?"flex":"none";
-const hideEl=id=>$(id).style.display="none";
-function showMsg(id,txt,tipo){const e=$(id);e.className="msg msg-"+tipo;e.textContent=txt;e.style.display="block";}
-function setBadge(id,txt,tipo){const b=$(id);b.className="up-badge "+tipo;b.innerHTML=(tipo==="uploading")?`<span class="up-spin"></span>${txt}`:txt;b.style.display="inline-flex";}
-function setProgress(p,pct){$(p+"ProgWrap").style.display=pct>0?"block":"none";$(p+"ProgBar").style.width=Math.min(pct,100)+"%";}
-function iniciales(n){const p=(n||"").trim().split(" ");return((p[0]?.[0]||"")+(p[1]?.[0]||"")).toUpperCase()||"--";}
-function setAvatar(nombre,foto){const d=$("avaDiv");if(foto&&foto.startsWith("http")){d.innerHTML=`<img src="${foto}" alt="foto" onerror="this.parentNode.innerHTML='<span>${iniciales(nombre)}</span>'" />`;}else{d.innerHTML=`<span>${iniciales(nombre)}</span>`;}}
-function toBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result.split(",")[1]);r.onerror=rej;r.readAsDataURL(file);});}
 
-function handleFoto(input){
-  const f=input.files[0];if(!f)return;
-  if(f.size>5*1024*1024){setBadge("fotoBadge","Muy grande (máx 5 MB)","err");return;}
-  const r=new FileReader();
-  r.onload=e=>{$("fotoPrev").src=e.target.result;$("fotoPrev").style.display="block";$("fotoLabel").textContent=f.name;setBadge("fotoBadge","Lista para subir","ok");};
+let filaActual = null;
+let docDirector = "";
+let modoRegistro = false;  // false = edición, true = nuevo registro
+
+const $ = id => document.getElementById(id);
+const loader = (id, v) => $(id).style.display = v ? "flex" : "none";
+const hideEl = id => $(id).style.display = "none";
+
+function showMsg(id, txt, tipo) {
+  const e = $(id); e.className = "msg msg-" + tipo; e.textContent = txt; e.style.display = "block";
+}
+function setBadge(id, txt, tipo) {
+  const b = $(id); b.className = "up-badge " + tipo;
+  b.innerHTML = (tipo === "uploading") ? `<span class="up-spin"></span>${txt}` : txt;
+  b.style.display = "inline-flex";
+}
+function setProgress(p, pct) {
+  $(p + "ProgWrap").style.display = pct > 0 ? "block" : "none";
+  $(p + "ProgBar").style.width = Math.min(pct, 100) + "%";
+}
+function iniciales(n) {
+  const p = (n || "").trim().split(" ");
+  return ((p[0]?.[0] || "") + (p[1]?.[0] || "")).toUpperCase() || "--";
+}
+function setAvatar(nombre, foto) {
+  const d = $("avaDiv");
+  if (foto && foto.startsWith("http")) {
+    d.innerHTML = `<img src="${foto}" alt="foto" onerror="this.parentNode.innerHTML='<span>${iniciales(nombre)}</span>'" />`;
+  } else {
+    d.innerHTML = `<span>${iniciales(nombre)}</span>`;
+  }
+}
+function toBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => res(e.target.result.split(",")[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+function handleFoto(input) {
+  const f = input.files[0]; if (!f) return;
+  if (f.size > 5 * 1024 * 1024) { setBadge("fotoBadge", "Muy grande (máx 5 MB)", "err"); return; }
+  const r = new FileReader();
+  r.onload = e => {
+    $("fotoPrev").src = e.target.result; $("fotoPrev").style.display = "block";
+    $("fotoLabel").textContent = f.name; setBadge("fotoBadge", "Lista para subir", "ok");
+  };
   r.readAsDataURL(f);
 }
 
-function handleHV(input){
-  const f=input.files[0];if(!f)return;
-  if(f.size>10*1024*1024){setBadge("hvBadge","Muy grande (máx 10 MB)","err");return;}
-  $("hvLabel").textContent=f.name;setBadge("hvBadge","Lista para subir","ok");
+function handleHV(input) {
+  const f = input.files[0]; if (!f) return;
+  if (f.size > 10 * 1024 * 1024) { setBadge("hvBadge", "Muy grande (máx 10 MB)", "err"); return; }
+  $("hvLabel").textContent = f.name; setBadge("hvBadge", "Lista para subir", "ok");
 }
 
-// Sube el archivo y devuelve {ok, url} directamente — sin polling
+// Actualiza nombre/iniciales en la cabecera en tiempo real (modo registro)
+function actualizarCabecera() {
+  if (!modoRegistro) return;
+  const nombre = $("f_NOMBRE_DIRECTOR").value.trim();
+  const correo = $("f_CORREO_DIRECTOR").value.trim();
+  $("pName").textContent = nombre || "Nuevo director";
+  $("pSub").textContent  = correo || "Completa el formulario para registrarte";
+  setAvatar(nombre, null);
+}
+
 async function subirArchivo(file, action, documento, fila, badgeId, progPrefix) {
   setBadge(badgeId, "Subiendo a Drive...", "uploading");
   setProgress(progPrefix, 20);
@@ -231,124 +335,249 @@ async function subirArchivo(file, action, documento, fila, badgeId, progPrefix) 
   const extension = file.name.split(".").pop().toLowerCase();
   const res = await fetch(GAS, {
     method: "POST",
-    headers: {"Content-Type":"text/plain"},
-    body: JSON.stringify({action, base64, mimeType:file.type, extension, documento, fila})
+    headers: { "Content-Type": "text/plain" },
+    body: JSON.stringify({ action, base64, mimeType: file.type, extension, documento, fila })
   });
   setProgress(progPrefix, 100);
-  setTimeout(()=>setProgress(progPrefix,0), 500);
+  setTimeout(() => setProgress(progPrefix, 0), 500);
   return res.json();
 }
 
-async function buscar(){
-  const q=$("qInput").value.trim();
-  if(!q){showMsg("sMsg","Ingresa tu documento, código o correo.","err");return;}
-  hideEl("sMsg");hideEl("saveMsg");$("profileCard").style.display="none";
-  loader("sLoad",true);$("searchBtn").disabled=true;
-  try{
-    const res=await fetch(GAS+"?action=buscar&query="+encodeURIComponent(q.toLowerCase()));
-    const json=await res.json();
-    loader("sLoad",false);$("searchBtn").disabled=false;
-    if(!json.ok){showMsg("sMsg","No se encontró ningún registro. Verifica e intenta de nuevo.","err");return;}
-    cargarPerfil(json.data,json.fila);
-  }catch(e){
-    loader("sLoad",false);$("searchBtn").disabled=false;
-    showMsg("sMsg","Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.","err");
+// ── Búsqueda ─────────────────────────────────────────────────
+async function buscar() {
+  const q = $("qInput").value.trim();
+  if (!q) { showMsg("sMsg", "Ingresa tu documento, código o correo.", "err"); return; }
+
+  hideEl("sMsg");
+  hideEl("notFoundBox");
+  hideEl("saveMsg");
+  $("profileCard").style.display = "none";
+  loader("sLoad", true);
+  $("searchBtn").disabled = true;
+
+  try {
+    const res  = await fetch(GAS + "?action=buscar&query=" + encodeURIComponent(q.toLowerCase()));
+    const json = await res.json();
+    loader("sLoad", false); $("searchBtn").disabled = false;
+
+    if (json.ok) {
+      modoRegistro = false;
+      cargarPerfil(json.data, json.fila);
+    } else {
+      // Mostrar bloque "No encontrado" con botón Crear
+      $("notFoundQuery").textContent = '"' + q + '"';
+      $("notFoundBox").style.display = "block";
+      // Pre-rellenar el campo con el valor buscado (puede ser documento/correo)
+      window._queryPreFill = q;
+    }
+  } catch (e) {
+    loader("sLoad", false); $("searchBtn").disabled = false;
+    showMsg("sMsg", "Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.", "err");
   }
 }
 
-function cargarPerfil(data,fila){
-  filaActual=fila;docDirector=String(data["DOCUMENTO"]||"").trim();
-  CAMPOS.forEach(c=>{const el=$("f_"+c);if(el)el.value=data[c]||"";});
-  $("pName").textContent=data["NOMBRE_DIRECTOR"]||"Sin nombre";
-  $("pSub").textContent=data["CORREO_DIRECTOR"]||data["DOCUMENTO"]||"";
-  setAvatar(data["NOMBRE_DIRECTOR"],data["FOTOGRAFIA"]);
-  if(data["FOTOGRAFIA"]?.startsWith("http")){
-    $("fotoPrev").src=data["FOTOGRAFIA"];$("fotoPrev").style.display="block";
-    $("fotoLabel").textContent=docDirector+" (foto actual)";setBadge("fotoBadge","Guardada en Drive","ok");
-  }else{
-    $("fotoPrev").style.display="none";$("fotoLabel").textContent="Haz clic para seleccionar una foto";hideEl("fotoBadge");
-  }
-  if(data["HOJA_DE_VIDA"]?.startsWith("http")){
-    $("pdfLink").href=data["HOJA_DE_VIDA"];$("pdfLinkRow").style.display="flex";
-    $("hvLabel").textContent=docDirector+" (HV actual)";setBadge("hvBadge","Guardada en Drive","ok");
-  }else{
-    $("pdfLinkRow").style.display="none";$("hvLabel").textContent="Haz clic para seleccionar el PDF";hideEl("hvBadge");
-  }
-  $("profileCard").style.display="block";$("fotoFile").value="";$("hvFile").value="";
-  setTimeout(()=>$("profileCard").scrollIntoView({behavior:"smooth",block:"start"}),100);
+// ── Abrir formulario en modo registro ────────────────────────
+function abrirRegistro() {
+  modoRegistro = true;
+  hideEl("notFoundBox");
+  hideEl("sMsg");
+
+  // Limpiar todos los campos
+  CAMPOS.forEach(c => { const el = $("f_" + c); if (el) el.value = ""; });
+  $("f_FOTOGRAFIA").value = ""; $("f_HOJA_DE_VIDA").value = "";
+
+  // Pre-rellenar documento o correo según lo buscado
+  const q = window._queryPreFill || "";
+  if (q.includes("@"))          $("f_CORREO_DIRECTOR").value = q;
+  else if (/^\d+$/.test(q))    $("f_DOCUMENTO").value = q;
+  else if (/^[Uu]\d+/.test(q)) $("f_CODIGO").value = q;
+
+  // UI modo registro
+  $("modeBanner").style.display   = "flex";
+  $("modeBadge").className        = "badge badge-new";
+  $("modeBadge").textContent      = "Nuevo registro";
+  $("saveBtnLabel").textContent   = "Crear perfil";
+  $("pName").textContent          = "Nuevo director";
+  $("pSub").textContent           = "Completa el formulario para registrarte";
+  $("fotoPrev").style.display     = "none";
+  $("pdfLinkRow").style.display   = "none";
+  $("fotoLabel").textContent      = "Haz clic para seleccionar una foto";
+  $("hvLabel").textContent        = "Haz clic para seleccionar el PDF";
+  hideEl("fotoBadge"); hideEl("hvBadge");
+  setProgress("foto", 0); setProgress("hv", 0);
+  setAvatar("", null);
+  filaActual = null;
+  hideEl("saveMsg");
+  $("fotoFile").value = ""; $("hvFile").value = "";
+
+  $("profileCard").style.display = "block";
+  setTimeout(() => $("profileCard").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
 }
 
-function limpiar(){
-  $("profileCard").style.display="none";$("qInput").value="";hideEl("sMsg");hideEl("saveMsg");
-  filaActual=null;docDirector="";$("fotoPrev").style.display="none";$("pdfLinkRow").style.display="none";
-  hideEl("fotoBadge");hideEl("hvBadge");
-  $("fotoLabel").textContent="Haz clic para seleccionar una foto";
-  $("hvLabel").textContent="Haz clic para seleccionar el PDF";
-  setProgress("foto",0);setProgress("hv",0);
+// ── Cargar perfil existente ───────────────────────────────────
+function cargarPerfil(data, fila) {
+  filaActual  = fila;
+  docDirector = String(data["DOCUMENTO"] || "").trim();
+  CAMPOS.forEach(c => { const el = $("f_" + c); if (el) el.value = data[c] || ""; });
+  $("pName").textContent = data["NOMBRE_DIRECTOR"] || "Sin nombre";
+  $("pSub").textContent  = data["CORREO_DIRECTOR"] || data["DOCUMENTO"] || "";
+  setAvatar(data["NOMBRE_DIRECTOR"], data["FOTOGRAFIA"]);
+
+  $("modeBanner").style.display = "none";
+  $("modeBadge").className      = "badge";
+  $("modeBadge").textContent    = "Director de Maestría · UFPS";
+  $("saveBtnLabel").textContent = "Guardar cambios";
+
+  if (data["FOTOGRAFIA"]?.startsWith("http")) {
+    $("fotoPrev").src = data["FOTOGRAFIA"]; $("fotoPrev").style.display = "block";
+    $("fotoLabel").textContent = docDirector + " (foto actual)";
+    setBadge("fotoBadge", "Guardada en Drive", "ok");
+  } else {
+    $("fotoPrev").style.display = "none";
+    $("fotoLabel").textContent  = "Haz clic para seleccionar una foto";
+    hideEl("fotoBadge");
+  }
+  if (data["HOJA_DE_VIDA"]?.startsWith("http")) {
+    $("pdfLink").href = data["HOJA_DE_VIDA"]; $("pdfLinkRow").style.display = "flex";
+    $("hvLabel").textContent = docDirector + " (HV actual)";
+    setBadge("hvBadge", "Guardada en Drive", "ok");
+  } else {
+    $("pdfLinkRow").style.display = "none";
+    $("hvLabel").textContent      = "Haz clic para seleccionar el PDF";
+    hideEl("hvBadge");
+  }
+
+  $("profileCard").style.display = "block";
+  $("fotoFile").value = ""; $("hvFile").value = "";
+  setTimeout(() => $("profileCard").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
 }
 
-async function guardar(){
-  if(!filaActual)return;
-  const docActual=$("f_DOCUMENTO").value.trim()||docDirector;
-  hideEl("saveMsg");loader("saveLoad",true);$("saveBtn").disabled=true;
+function limpiar() {
+  $("profileCard").style.display = "none";
+  $("qInput").value = "";
+  hideEl("sMsg"); hideEl("saveMsg"); hideEl("notFoundBox");
+  filaActual = null; docDirector = ""; modoRegistro = false;
+  window._queryPreFill = "";
+  $("fotoPrev").style.display = "none"; $("pdfLinkRow").style.display = "none";
+  hideEl("fotoBadge"); hideEl("hvBadge");
+  $("fotoLabel").textContent = "Haz clic para seleccionar una foto";
+  $("hvLabel").textContent   = "Haz clic para seleccionar el PDF";
+  setProgress("foto", 0); setProgress("hv", 0);
+}
+
+// ── Guardar (edición) o Crear (registro nuevo) ───────────────
+async function guardar() {
+  hideEl("saveMsg"); loader("saveLoad", true); $("saveBtn").disabled = true;
+
+  const docActual = $("f_DOCUMENTO").value.trim() || docDirector;
+
+  // Validar campos obligatorios en modo registro
+  if (modoRegistro) {
+    const nombre  = $("f_NOMBRE_DIRECTOR").value.trim();
+    const correo  = $("f_CORREO_DIRECTOR").value.trim();
+    if (!docActual || !nombre || !correo) {
+      loader("saveLoad", false); $("saveBtn").disabled = false;
+      showMsg("saveMsg", "Documento, nombre y correo son obligatorios para registrarte.", "err");
+      return;
+    }
+  }
 
   // ── Subir fotografía ──────────────────────────────────────
-  const fotoFile=$("fotoFile").files[0];
-  if(fotoFile){
-    $("saveLbl").textContent="Subiendo fotografía...";
-    try{
-      const r=await subirArchivo(fotoFile,"subirFoto",docActual,filaActual,"fotoBadge","foto");
-      if(r.ok && r.url){
-        $("f_FOTOGRAFIA").value=r.url;
-        $("fotoPrev").src=r.url;$("fotoPrev").style.display="block";
-        setBadge("fotoBadge","Guardada en Drive ✓","ok");
-        setAvatar($("f_NOMBRE_DIRECTOR").value,r.url);
-      }else{
-        setBadge("fotoBadge","Error: "+(r.msg||"no se pudo subir"),"err");
-      }
-    }catch(e){setBadge("fotoBadge","Error al subir foto","err");}
+  const fotoFile = $("fotoFile").files[0];
+  let urlFoto = $("f_FOTOGRAFIA").value;
+  if (fotoFile) {
+    $("saveLbl").textContent = "Subiendo fotografía...";
+    try {
+      const r = await subirArchivo(fotoFile, "subirFoto", docActual, filaActual, "fotoBadge", "foto");
+      if (r.ok && r.url) {
+        urlFoto = r.url;
+        $("f_FOTOGRAFIA").value = r.url;
+        $("fotoPrev").src = r.url; $("fotoPrev").style.display = "block";
+        setBadge("fotoBadge", "Guardada en Drive ✓", "ok");
+        setAvatar($("f_NOMBRE_DIRECTOR").value, r.url);
+      } else { setBadge("fotoBadge", "Error: " + (r.msg || "no se pudo subir"), "err"); }
+    } catch (e) { setBadge("fotoBadge", "Error al subir foto", "err"); }
   }
 
   // ── Subir hoja de vida ────────────────────────────────────
-  const hvFile=$("hvFile").files[0];
-  if(hvFile){
-    $("saveLbl").textContent="Subiendo hoja de vida...";
-    try{
-      const r=await subirArchivo(hvFile,"subirHV",docActual,filaActual,"hvBadge","hv");
-      if(r.ok && r.url){
-        $("f_HOJA_DE_VIDA").value=r.url;
-        $("pdfLink").href=r.url;$("pdfLinkRow").style.display="flex";
-        setBadge("hvBadge","Guardada en Drive ✓","ok");
-      }else{
-        setBadge("hvBadge","Error: "+(r.msg||"no se pudo subir"),"err");
-      }
-    }catch(e){setBadge("hvBadge","Error al subir PDF","err");}
+  const hvFile = $("hvFile").files[0];
+  let urlHV = $("f_HOJA_DE_VIDA").value;
+  if (hvFile) {
+    $("saveLbl").textContent = "Subiendo hoja de vida...";
+    try {
+      const r = await subirArchivo(hvFile, "subirHV", docActual, filaActual, "hvBadge", "hv");
+      if (r.ok && r.url) {
+        urlHV = r.url;
+        $("f_HOJA_DE_VIDA").value = r.url;
+        $("pdfLink").href = r.url; $("pdfLinkRow").style.display = "flex";
+        setBadge("hvBadge", "Guardada en Drive ✓", "ok");
+      } else { setBadge("hvBadge", "Error: " + (r.msg || "no se pudo subir"), "err"); }
+    } catch (e) { setBadge("hvBadge", "Error al subir PDF", "err"); }
   }
 
-  // ── Guardar campos de texto en Sheets ────────────────────
-  $("saveLbl").textContent="Guardando en Google Sheets...";
-  const campos={};
-  CAMPOS.forEach(c=>{const el=$("f_"+c);if(el)campos[c]=el.value.trim();});
-  try{
-    const res=await fetch(GAS+"?action=actualizar&fila="+filaActual+"&campos="+encodeURIComponent(JSON.stringify(campos)));
-    const json=await res.json();
-    loader("saveLoad",false);$("saveBtn").disabled=false;$("saveLbl").textContent="Guardando...";
-    if(json.ok){
-      showMsg("saveMsg","Perfil actualizado correctamente ✓","ok");
-      $("pName").textContent=campos["NOMBRE_DIRECTOR"]||"Sin nombre";
-      $("pSub").textContent=campos["CORREO_DIRECTOR"]||"";
-      setAvatar(campos["NOMBRE_DIRECTOR"],campos["FOTOGRAFIA"]);
-      docDirector=docActual;
-    }else{
-      showMsg("saveMsg","No se pudo guardar. Intenta de nuevo.","err");
+  // Construir campos con URLs actualizadas
+  const campos = {};
+  CAMPOS.forEach(c => { const el = $("f_" + c); if (el) campos[c] = el.value.trim(); });
+  campos["FOTOGRAFIA"]  = urlFoto  || "";
+  campos["HOJA_DE_VIDA"] = urlHV   || "";
+
+  // ── Modo REGISTRO: crear fila nueva ──────────────────────
+  if (modoRegistro) {
+    $("saveLbl").textContent = "Registrando en Google Sheets...";
+    try {
+      const res  = await fetch(GAS, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({ action: "crearDirector", campos })
+      });
+      const json = await res.json();
+      loader("saveLoad", false); $("saveBtn").disabled = false; $("saveLbl").textContent = "Guardando...";
+
+      if (json.ok) {
+        filaActual   = json.fila;
+        modoRegistro = false;
+        docDirector  = docActual;
+        $("modeBanner").style.display = "none";
+        $("modeBadge").className      = "badge";
+        $("modeBadge").textContent    = "Director de Maestría · UFPS";
+        $("saveBtnLabel").textContent = "Guardar cambios";
+        $("pName").textContent = campos["NOMBRE_DIRECTOR"] || "Sin nombre";
+        $("pSub").textContent  = campos["CORREO_DIRECTOR"] || "";
+        setAvatar(campos["NOMBRE_DIRECTOR"], campos["FOTOGRAFIA"]);
+        showMsg("saveMsg", "✓ Perfil creado correctamente. Ya estás en el Banco de Directores.", "ok");
+      } else {
+        showMsg("saveMsg", "Error al registrar: " + (json.msg || "intenta de nuevo."), "err");
+      }
+    } catch (e) {
+      loader("saveLoad", false); $("saveBtn").disabled = false;
+      showMsg("saveMsg", "Error de conexión al registrar.", "err");
     }
-  }catch(e){
-    loader("saveLoad",false);$("saveBtn").disabled=false;$("saveLbl").textContent="Guardando...";
-    showMsg("saveMsg","Error de conexión al guardar.","err");
+    return;
+  }
+
+  // ── Modo EDICIÓN: actualizar fila existente ───────────────
+  $("saveLbl").textContent = "Guardando en Google Sheets...";
+  try {
+    const res  = await fetch(GAS + "?action=actualizar&fila=" + filaActual + "&campos=" + encodeURIComponent(JSON.stringify(campos)));
+    const json = await res.json();
+    loader("saveLoad", false); $("saveBtn").disabled = false; $("saveLbl").textContent = "Guardando...";
+    if (json.ok) {
+      showMsg("saveMsg", "Perfil actualizado correctamente ✓", "ok");
+      $("pName").textContent = campos["NOMBRE_DIRECTOR"] || "Sin nombre";
+      $("pSub").textContent  = campos["CORREO_DIRECTOR"] || "";
+      setAvatar(campos["NOMBRE_DIRECTOR"], campos["FOTOGRAFIA"]);
+      docDirector = docActual;
+    } else {
+      showMsg("saveMsg", "No se pudo guardar. Intenta de nuevo.", "err");
+    }
+  } catch (e) {
+    loader("saveLoad", false); $("saveBtn").disabled = false;
+    showMsg("saveMsg", "Error de conexión al guardar.", "err");
   }
 }
 
-$("qInput").addEventListener("keydown",e=>{if(e.key==="Enter")buscar();});
+$("qInput").addEventListener("keydown", e => { if (e.key === "Enter") buscar(); });
 </script>
 </body>
 </html>
+
