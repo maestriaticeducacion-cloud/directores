@@ -105,6 +105,17 @@
   .pdf-link-row a{font-size:12px;color:var(--red);font-weight:500;text-decoration:none;}
   .pdf-link-row a:hover{text-decoration:underline;}
 
+  /* ── Política ── */
+  .politica-box{background:#f0f4ff;border:1.5px solid #c5d6f5;border-radius:var(--radius-sm);padding:1.1rem 1.25rem;margin-top:.25rem;}
+  .politica-texto{font-size:13px;color:var(--gray-700);line-height:1.75;max-height:130px;overflow-y:auto;padding-right:6px;margin-bottom:1rem;}
+  .politica-texto::-webkit-scrollbar{width:4px;}.politica-texto::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:4px;}
+  .politica-check-row{display:flex;align-items:flex-start;gap:10px;cursor:pointer;user-select:none;}
+  .politica-check-row input[type=checkbox]{width:17px;height:17px;flex-shrink:0;margin-top:1px;accent-color:var(--blue);cursor:pointer;}
+  .politica-check-label{font-size:13px;color:var(--gray-900);font-weight:500;line-height:1.5;}
+  .politica-check-label span{color:var(--red);}
+  .politica-box.error{border-color:var(--red);background:var(--red-light);}
+  .politica-box.aceptada{border-color:#4caf50;background:#f1faf1;}
+
   /* ── Acciones ── */
   .arow{display:flex;gap:10px;justify-content:flex-end;align-items:center;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--gray-100);flex-wrap:wrap;}
   .save-msg{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;flex:1;min-width:180px;}
@@ -144,8 +155,8 @@
 
     <!-- Bloque "No encontrado" -->
     <div class="not-found-box" id="notFoundBox">
-      <p>No se encontró en el banco de directores con <strong id="notFoundQuery"></strong> en el sistema.<br>
-      Si quieres participar en el BAnco de Directores y Codirectores de la Maestría TIC y aún no estás registrado, puedes crear tu perfil ahora.</p>
+      <p>No se encontró ningún director con <strong id="notFoundQuery"></strong> en el sistema.<br>
+      Si eres director de la Maestría TIC y aún no estás registrado, puedes crear tu perfil ahora.</p>
       <button class="btn btn-orange" onclick="abrirRegistro()">
         <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:white"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"/></svg>
         Registrarme como director
@@ -240,6 +251,26 @@
 
     <input id="f_FOTOGRAFIA" type="hidden"/>
     <input id="f_HOJA_DE_VIDA" type="hidden"/>
+    <input id="f_ACEPTO_POLITICA" type="hidden"/>
+
+    <!-- ── Política de vinculación ── -->
+    <div class="stitle">Compromiso institucional</div>
+    <div class="politica-box" id="politicaBox">
+      <div class="politica-texto">
+        Al registrarme en el <strong>Banco de Directores y Codirectores de la Maestría en TIC Aplicadas a la Educación</strong> de la Universidad Francisco de Paula Santander, declaro conocer y aceptar las siguientes responsabilidades académicas e institucionales:<br><br>
+        <strong>1. Acompañamiento integral.</strong> Me comprometo a orientar y acompañar al estudiante durante todo el proceso de desarrollo de su trabajo de grado, investigación o tesis, brindando asesoría académica continua tanto en la ejecución de la investigación como en la elaboración del documento final.<br><br>
+        <strong>2. Evaluación y seguimiento periódico.</strong> Realizaré evaluaciones periódicas del avance del trabajo e informaré oportunamente al estudiante y al Comité Curricular sobre los resultados, antes de finalizar cada período académico.<br><br>
+        <strong>3. Propuesta de sustentación.</strong> Cuando se cumplan las condiciones académicas establecidas por el programa, propondré ante el Comité Curricular del respectivo programa la autorización para la sustentación pública del trabajo de grado.<br><br>
+        <strong>4. Responsabilidad académica.</strong> Asumo la responsabilidad de garantizar la calidad académica, la originalidad y la pertinencia del trabajo dirigido, en concordancia con los lineamientos del programa y las normas de la Universidad Francisco de Paula Santander.
+      </div>
+      <label class="politica-check-row" onclick="togglePolitica()">
+        <input type="checkbox" id="checkPolitica" onchange="togglePolitica()" />
+        <span class="politica-check-label">
+          He leído, comprendo y acepto el compromiso institucional descrito anteriormente.
+          <span>*</span>
+        </span>
+      </label>
+    </div>
 
     <div class="arow">
       <div id="saveLoad" class="lrow"><span class="spinner"></span> <span class="save-lbl" id="saveLbl">Guardando...</span></div>
@@ -257,7 +288,7 @@
 
 <script>
 const GAS = "https://script.google.com/macros/s/AKfycbzpqriICwVL3AUci1kTHWBf7VC7FB-8FalP2ZNDouFHUPFYMFXHwNy4kQEgiJV3ji2l/exec";
-const CAMPOS = ["DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR","FOTOGRAFIA","PREGRADO","ESPECIALIZACION","MAESTRIA","DOCTORADO","GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA","HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN"];
+const CAMPOS = ["DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR","FOTOGRAFIA","PREGRADO","ESPECIALIZACION","MAESTRIA","DOCTORADO","GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA","HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN","ACEPTO_POLITICA"];
 
 let filaActual = null;
 let docDirector = "";
@@ -298,6 +329,14 @@ function toBase64(file) {
     r.onerror = rej;
     r.readAsDataURL(file);
   });
+}
+
+function togglePolitica() {
+  const checked = $("checkPolitica").checked;
+  $("f_ACEPTO_POLITICA").value = checked ? "SI" : "";
+  const box = $("politicaBox");
+  box.classList.toggle("aceptada", checked);
+  box.classList.remove("error");
 }
 
 function handleFoto(input) {
@@ -405,6 +444,9 @@ function abrirRegistro() {
   $("hvLabel").textContent        = "Haz clic para seleccionar el PDF";
   hideEl("fotoBadge"); hideEl("hvBadge");
   setProgress("foto", 0); setProgress("hv", 0);
+  $("checkPolitica").checked = false;
+  $("f_ACEPTO_POLITICA").value = "";
+  $("politicaBox").classList.remove("aceptada","error");
   setAvatar("", null);
   filaActual = null;
   hideEl("saveMsg");
@@ -463,6 +505,9 @@ function limpiar() {
   $("fotoLabel").textContent = "Haz clic para seleccionar una foto";
   $("hvLabel").textContent   = "Haz clic para seleccionar el PDF";
   setProgress("foto", 0); setProgress("hv", 0);
+  $("checkPolitica").checked = false;
+  $("f_ACEPTO_POLITICA").value = "";
+  $("politicaBox").classList.remove("aceptada","error");
 }
 
 // ── Guardar (edición) o Crear (registro nuevo) ───────────────
@@ -478,6 +523,13 @@ async function guardar() {
     if (!docActual || !nombre || !correo) {
       loader("saveLoad", false); $("saveBtn").disabled = false;
       showMsg("saveMsg", "Documento, nombre y correo son obligatorios para registrarte.", "err");
+      return;
+    }
+    if (!$("checkPolitica").checked) {
+      loader("saveLoad", false); $("saveBtn").disabled = false;
+      $("politicaBox").classList.add("error");
+      $("politicaBox").scrollIntoView({ behavior: "smooth", block: "center" });
+      showMsg("saveMsg", "Debes aceptar el compromiso institucional para completar el registro.", "err");
       return;
     }
   }
@@ -518,8 +570,9 @@ async function guardar() {
   // Construir campos con URLs actualizadas
   const campos = {};
   CAMPOS.forEach(c => { const el = $("f_" + c); if (el) campos[c] = el.value.trim(); });
-  campos["FOTOGRAFIA"]  = urlFoto  || "";
-  campos["HOJA_DE_VIDA"] = urlHV   || "";
+  campos["FOTOGRAFIA"]    = urlFoto || "";
+  campos["HOJA_DE_VIDA"]  = urlHV   || "";
+  if (modoRegistro) campos["ACEPTO_POLITICA"] = $("checkPolitica").checked ? "SI" : "";
 
   // ── Modo REGISTRO: crear fila nueva ──────────────────────
   if (modoRegistro) {
@@ -580,4 +633,3 @@ $("qInput").addEventListener("keydown", e => { if (e.key === "Enter") buscar(); 
 </script>
 </body>
 </html>
-
