@@ -7,103 +7,90 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --blue: #1a56a0; --blue-dark: #0d3b75; --blue-light: #e8f0fb;
-    --green: #2d6a10; --green-light: #eaf3e0;
-    --red: #c0392b; --red-light: #fdecea;
-    --orange: #e67e22; --orange-light: #fef5ec;
-    --gray-50: #f7f7f5; --gray-100: #efefec; --gray-200: #ddddd8;
-    --gray-400: #9a9a93; --gray-700: #3a3a36; --gray-900: #1a1a18;
-    --radius: 10px; --radius-sm: 6px;
-    --font-body: 'DM Sans', sans-serif;
-    --font-display: 'DM Serif Display', serif;
+    --blue:#1a56a0;--blue-dark:#0d3b75;--blue-light:#e8f0fb;
+    --green:#2d6a10;--green-light:#eaf3e0;
+    --red:#c0392b;--red-light:#fdecea;
+    --orange:#e67e22;--orange-light:#fef5ec;
+    --gray-50:#f7f7f5;--gray-100:#efefec;--gray-200:#ddddd8;
+    --gray-400:#9a9a93;--gray-700:#3a3a36;--gray-900:#1a1a18;
+    --radius:10px;--radius-sm:6px;
+    --font-body:'DM Sans',sans-serif;--font-display:'DM Serif Display',serif;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font-body); background: var(--gray-50); color: var(--gray-900); min-height: 100vh; }
-
-  .topbar { background: var(--blue-dark); padding: 0 2rem; display: flex; align-items: center; height: 56px; gap: 14px; }
-  .topbar-logo { width: 34px; height: 34px; background: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .topbar-logo svg { width: 20px; height: 20px; fill: var(--blue-dark); }
-  .topbar-title { color: white; font-size: 14px; font-weight: 500; }
-  .topbar-sub { color: rgba(255,255,255,0.5); font-size: 12px; margin-left: auto; }
-
-  .page { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
-  .hero { margin-bottom: 2rem; }
-  .hero h1 { font-family: var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.2; }
-  .hero p { font-size: 14px; color: var(--gray-400); margin-top: 6px; }
-  .card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
-
-  .search-label { font-size: 13px; color: var(--gray-400); margin-bottom: 10px; display: block; }
-  .search-row { display: flex; gap: 10px; }
-  .search-row input { flex: 1; height: 44px; padding: 0 14px; font-size: 14px; font-family: var(--font-body); border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--gray-50); color: var(--gray-900); outline: none; transition: border-color .15s, box-shadow .15s; }
-  .search-row input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,86,160,.12); background: white; }
-  .search-row input::placeholder { color: var(--gray-400); }
-
-  .btn { height: 44px; padding: 0 20px; font-size: 13px; font-weight: 500; font-family: var(--font-body); border-radius: var(--radius-sm); border: 1.5px solid transparent; cursor: pointer; transition: all .15s; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
-  .btn-blue  { background: var(--blue);  color: white; } .btn-blue:hover  { background: var(--blue-dark); } .btn-blue:disabled  { opacity:.45; cursor:not-allowed; }
-  .btn-ghost { background: white; color: var(--gray-700); border-color: var(--gray-200); } .btn-ghost:hover { background: var(--gray-50); }
-  .btn-green { background: var(--green); color: white; } .btn-green:hover { background: #1f4d0c; } .btn-green:disabled { opacity:.45; cursor:not-allowed; }
-
-  .msg { font-size: 13px; padding: 10px 14px; border-radius: var(--radius-sm); margin-top: 12px; display: none; line-height: 1.5; }
-  .msg-err  { background: var(--red-light);    color: var(--red);    display: block; }
-  .msg-ok   { background: var(--green-light);  color: var(--green);  display: block; }
-  .msg-warn { background: var(--orange-light); color: var(--orange); display: block; }
-
-  .lrow { display: none; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-400); margin-top: 12px; }
-  .spinner { width: 15px; height: 15px; border: 2px solid var(--gray-200); border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .profile { display: none; }
-  .phead { display: flex; align-items: center; gap: 16px; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--gray-100); }
-  .ava { width: 58px; height: 58px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 500; color: var(--blue); flex-shrink: 0; overflow: hidden; }
-  .ava img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-  .pname { font-family: var(--font-display); font-size: 20px; font-weight: 400; }
-  .psub  { font-size: 13px; color: var(--gray-400); margin-top: 3px; }
-  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--blue-light); color: var(--blue); margin-top: 5px; }
-
-  .stitle { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); margin: 1.25rem 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--gray-100); }
-  .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .fi { display: flex; flex-direction: column; gap: 5px; }
-  .fl { font-size: 11px; font-weight: 500; color: var(--gray-400); text-transform: uppercase; letter-spacing: .05em; }
-  .finp { height: 38px; padding: 0 12px; font-size: 13px; font-family: var(--font-body); border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--gray-50); color: var(--gray-900); outline: none; width: 100%; transition: border-color .15s, box-shadow .15s; }
-  .finp:focus { border-color: var(--blue); background: white; box-shadow: 0 0 0 3px rgba(26,86,160,.1); }
-  .finp.url { color: var(--blue); }
-  .full { grid-column: span 2; }
-
-  .upload-zone { border: 1.5px dashed var(--gray-200); border-radius: var(--radius-sm); padding: 1rem; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: border-color .15s, background .15s; background: var(--gray-50); position: relative; }
-  .upload-zone:hover { border-color: var(--blue); background: var(--blue-light); }
-  .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .up-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .up-icon svg { width: 20px; height: 20px; }
-  .up-icon.foto { background: var(--blue-light); } .up-icon.foto svg { fill: var(--blue); }
-  .up-icon.hv   { background: var(--red-light);  } .up-icon.hv   svg { fill: var(--red);  }
-  .up-text { flex: 1; min-width: 0; }
-  .up-text strong { font-size: 13px; font-weight: 500; color: var(--gray-900); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .up-text span   { font-size: 12px; color: var(--gray-400); }
-  .up-prev { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--gray-200); display: none; flex-shrink: 0; }
-  .up-badge { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; white-space: nowrap; display: none; align-items: center; gap: 4px; }
-  .up-badge.ok        { background: var(--green-light); color: var(--green); display: inline-flex; }
-  .up-badge.uploading { background: var(--blue-light);  color: var(--blue);  display: inline-flex; }
-  .up-badge.err       { background: var(--red-light);   color: var(--red);   display: inline-flex; }
-  .up-spin { width: 10px; height: 10px; border: 1.5px solid rgba(26,86,160,.3); border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
-
-  .prog-wrap { height: 5px; background: var(--gray-100); border-radius: 4px; margin-top: 8px; display: none; overflow: hidden; }
-  .prog-bar  { height: 100%; background: var(--blue); border-radius: 4px; width: 0%; transition: width .3s; }
-
-  .pdf-link-row { display: none; align-items: center; gap: 8px; margin-top: 8px; padding: 8px 12px; background: var(--red-light); border-radius: var(--radius-sm); }
-  .pdf-link-row svg { width: 15px; height: 15px; fill: var(--red); flex-shrink: 0; }
-  .pdf-link-row a { font-size: 12px; color: var(--red); font-weight: 500; text-decoration: none; }
-  .pdf-link-row a:hover { text-decoration: underline; }
-
-  .arow { display: flex; gap: 10px; justify-content: flex-end; align-items: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--gray-100); flex-wrap: wrap; }
-  .save-msg { font-size: 13px; padding: 8px 12px; border-radius: var(--radius-sm); display: none; flex: 1; min-width: 180px; }
-  .save-lbl { font-size: 13px; color: var(--gray-400); }
-  .footer { text-align: center; font-size: 12px; color: var(--gray-400); margin-top: 2rem; }
-
-  @media (max-width: 540px) {
-    .fgrid { grid-template-columns: 1fr; } .full { grid-column: span 1; }
-    .topbar-sub { display: none; }
-    .arow { flex-direction: column; align-items: stretch; }
-    .hero h1 { font-size: 22px; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font-body);background:var(--gray-50);color:var(--gray-900);min-height:100vh;}
+  .topbar{background:var(--blue-dark);padding:0 2rem;display:flex;align-items:center;height:56px;gap:14px;}
+  .topbar-logo{width:34px;height:34px;background:white;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .topbar-logo svg{width:20px;height:20px;fill:var(--blue-dark);}
+  .topbar-title{color:white;font-size:14px;font-weight:500;}
+  .topbar-sub{color:rgba(255,255,255,0.5);font-size:12px;margin-left:auto;}
+  .page{max-width:780px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+  .hero{margin-bottom:2rem;}
+  .hero h1{font-family:var(--font-display);font-size:28px;font-weight:400;line-height:1.2;}
+  .hero p{font-size:14px;color:var(--gray-400);margin-top:6px;}
+  .card{background:white;border:1px solid var(--gray-200);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem;}
+  .search-label{font-size:13px;color:var(--gray-400);margin-bottom:10px;display:block;}
+  .search-row{display:flex;gap:10px;}
+  .search-row input{flex:1;height:44px;padding:0 14px;font-size:14px;font-family:var(--font-body);border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--gray-50);color:var(--gray-900);outline:none;transition:border-color .15s,box-shadow .15s;}
+  .search-row input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,160,.12);background:white;}
+  .search-row input::placeholder{color:var(--gray-400);}
+  .btn{height:44px;padding:0 20px;font-size:13px;font-weight:500;font-family:var(--font-body);border-radius:var(--radius-sm);border:1.5px solid transparent;cursor:pointer;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;}
+  .btn-blue{background:var(--blue);color:white;}.btn-blue:hover{background:var(--blue-dark);}.btn-blue:disabled{opacity:.45;cursor:not-allowed;}
+  .btn-ghost{background:white;color:var(--gray-700);border-color:var(--gray-200);}.btn-ghost:hover{background:var(--gray-50);}
+  .btn-green{background:var(--green);color:white;}.btn-green:hover{background:#1f4d0c;}.btn-green:disabled{opacity:.45;cursor:not-allowed;}
+  .msg{font-size:13px;padding:10px 14px;border-radius:var(--radius-sm);margin-top:12px;display:none;line-height:1.5;}
+  .msg-err{background:var(--red-light);color:var(--red);display:block;}
+  .msg-ok{background:var(--green-light);color:var(--green);display:block;}
+  .msg-warn{background:var(--orange-light);color:var(--orange);display:block;}
+  .lrow{display:none;align-items:center;gap:8px;font-size:13px;color:var(--gray-400);margin-top:12px;}
+  .spinner{width:15px;height:15px;border:2px solid var(--gray-200);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .profile{display:none;}
+  .phead{display:flex;align-items:center;gap:16px;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--gray-100);}
+  .ava{width:58px;height:58px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:var(--blue);flex-shrink:0;overflow:hidden;}
+  .ava img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  .pname{font-family:var(--font-display);font-size:20px;font-weight:400;}
+  .psub{font-size:13px;color:var(--gray-400);margin-top:3px;}
+  .badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:var(--blue-light);color:var(--blue);margin-top:5px;}
+  .stitle{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin:1.25rem 0 10px;padding-bottom:6px;border-bottom:1px solid var(--gray-100);}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .fi{display:flex;flex-direction:column;gap:5px;}
+  .fl{font-size:11px;font-weight:500;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;}
+  .finp{height:38px;padding:0 12px;font-size:13px;font-family:var(--font-body);border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--gray-50);color:var(--gray-900);outline:none;width:100%;transition:border-color .15s,box-shadow .15s;}
+  .finp:focus{border-color:var(--blue);background:white;box-shadow:0 0 0 3px rgba(26,86,160,.1);}
+  .finp.url{color:var(--blue);}
+  .full{grid-column:span 2;}
+  .upload-zone{border:1.5px dashed var(--gray-200);border-radius:var(--radius-sm);padding:1rem;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s,background .15s;background:var(--gray-50);position:relative;}
+  .upload-zone:hover{border-color:var(--blue);background:var(--blue-light);}
+  .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+  .up-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .up-icon svg{width:20px;height:20px;}
+  .up-icon.foto{background:var(--blue-light);}.up-icon.foto svg{fill:var(--blue);}
+  .up-icon.hv{background:var(--red-light);}.up-icon.hv svg{fill:var(--red);}
+  .up-text{flex:1;min-width:0;}
+  .up-text strong{font-size:13px;font-weight:500;color:var(--gray-900);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .up-text span{font-size:12px;color:var(--gray-400);}
+  .up-prev{width:44px;height:44px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gray-200);display:none;flex-shrink:0;}
+  .up-badge{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;display:none;align-items:center;gap:4px;}
+  .up-badge.ok{background:var(--green-light);color:var(--green);display:inline-flex;}
+  .up-badge.uploading{background:var(--blue-light);color:var(--blue);display:inline-flex;}
+  .up-badge.waiting{background:var(--orange-light);color:var(--orange);display:inline-flex;}
+  .up-badge.err{background:var(--red-light);color:var(--red);display:inline-flex;}
+  .up-spin{width:10px;height:10px;border:1.5px solid rgba(26,86,160,.3);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;}
+  .prog-wrap{height:5px;background:var(--gray-100);border-radius:4px;margin-top:8px;display:none;overflow:hidden;}
+  .prog-bar{height:100%;background:var(--blue);border-radius:4px;width:0%;transition:width .3s;}
+  .pdf-link-row{display:none;align-items:center;gap:8px;margin-top:8px;padding:8px 12px;background:var(--red-light);border-radius:var(--radius-sm);}
+  .pdf-link-row svg{width:15px;height:15px;fill:var(--red);flex-shrink:0;}
+  .pdf-link-row a{font-size:12px;color:var(--red);font-weight:500;text-decoration:none;}
+  .pdf-link-row a:hover{text-decoration:underline;}
+  .arow{display:flex;gap:10px;justify-content:flex-end;align-items:center;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--gray-100);flex-wrap:wrap;}
+  .save-msg{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;flex:1;min-width:180px;}
+  .save-lbl{font-size:13px;color:var(--gray-400);}
+  .footer{text-align:center;font-size:12px;color:var(--gray-400);margin-top:2rem;}
+  @media(max-width:540px){
+    .fgrid{grid-template-columns:1fr;}.full{grid-column:span 1;}
+    .topbar-sub{display:none;}
+    .arow{flex-direction:column;align-items:stretch;}
+    .hero h1{font-size:22px;}
   }
 </style>
 </head>
@@ -113,13 +100,11 @@
   <span class="topbar-title">Maestría en TIC Aplicadas a la Educación</span>
   <span class="topbar-sub">Universidad Francisco de Paula Santander</span>
 </div>
-
 <div class="page">
   <div class="hero">
     <h1>Banco de Directores</h1>
     <p>Consulta y actualiza tu información en el registro institucional de la maestría.</p>
   </div>
-
   <div class="card">
     <span class="search-label">Ingresa tu documento, código o correo institucional para cargar tu perfil</span>
     <div class="search-row">
@@ -129,7 +114,6 @@
     <div id="sLoad" class="lrow"><span class="spinner"></span> Consultando Google Sheets...</div>
     <div id="sMsg" class="msg"></div>
   </div>
-
   <div class="card profile" id="profileCard">
     <div class="phead">
       <div class="ava" id="avaDiv"><span>--</span></div>
@@ -139,23 +123,21 @@
         <span class="badge">Director de Maestría · UFPS</span>
       </div>
     </div>
-
     <div class="stitle">Identificación</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">Documento</span><input class="finp" id="f_DOCUMENTO" type="text" /></div>
-      <div class="fi"><span class="fl">Código</span><input class="finp" id="f_CODIGO" type="text" /></div>
-      <div class="fi"><span class="fl">Nombre completo</span><input class="finp" id="f_NOMBRE_DIRECTOR" type="text" /></div>
-      <div class="fi"><span class="fl">Teléfono</span><input class="finp" id="f_TELEFONO" type="text" /></div>
-      <div class="fi full"><span class="fl">Correo</span><input class="finp" id="f_CORREO_DIRECTOR" type="email" /></div>
+      <div class="fi"><span class="fl">Documento</span><input class="finp" id="f_DOCUMENTO" type="text"/></div>
+      <div class="fi"><span class="fl">Código</span><input class="finp" id="f_CODIGO" type="text"/></div>
+      <div class="fi"><span class="fl">Nombre completo</span><input class="finp" id="f_NOMBRE_DIRECTOR" type="text"/></div>
+      <div class="fi"><span class="fl">Teléfono</span><input class="finp" id="f_TELEFONO" type="text"/></div>
+      <div class="fi full"><span class="fl">Correo</span><input class="finp" id="f_CORREO_DIRECTOR" type="email"/></div>
     </div>
-
     <div class="stitle">Fotografía</div>
     <div class="fi">
       <span class="fl">Subir fotografía (JPG, PNG — máx. 5 MB)</span>
       <div class="upload-zone">
-        <input type="file" id="fotoFile" accept="image/jpeg,image/png,image/webp" onchange="handleFoto(this)" />
+        <input type="file" id="fotoFile" accept="image/jpeg,image/png,image/webp" onchange="handleFoto(this)"/>
         <div class="up-icon foto"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div>
-        <img class="up-prev" id="fotoPrev" alt="preview" />
+        <img class="up-prev" id="fotoPrev" alt="preview"/>
         <div class="up-text">
           <strong id="fotoLabel">Haz clic para seleccionar una foto</strong>
           <span>JPG, PNG o WEBP · máx. 5 MB</span>
@@ -163,41 +145,36 @@
         <span class="up-badge" id="fotoBadge"></span>
       </div>
       <div class="prog-wrap" id="fotoProgWrap"><div class="prog-bar" id="fotoProgBar"></div></div>
-      <input id="f_FOTOGRAFIA" type="hidden" />
+      <input id="f_FOTOGRAFIA" type="hidden"/>
     </div>
-
     <div class="stitle">Formación académica</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">Pregrado</span><input class="finp" id="f_PREGRADO" type="text" /></div>
-      <div class="fi"><span class="fl">Especialización</span><input class="finp" id="f_ESPECIALIZACION" type="text" /></div>
-      <div class="fi"><span class="fl">Maestría</span><input class="finp" id="f_MAESTRIA" type="text" /></div>
-      <div class="fi"><span class="fl">Doctorado</span><input class="finp" id="f_DOCTORADO" type="text" /></div>
+      <div class="fi"><span class="fl">Pregrado</span><input class="finp" id="f_PREGRADO" type="text"/></div>
+      <div class="fi"><span class="fl">Especialización</span><input class="finp" id="f_ESPECIALIZACION" type="text"/></div>
+      <div class="fi"><span class="fl">Maestría</span><input class="finp" id="f_MAESTRIA" type="text"/></div>
+      <div class="fi"><span class="fl">Doctorado</span><input class="finp" id="f_DOCTORADO" type="text"/></div>
     </div>
-
     <div class="stitle">Grupos de investigación</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">Grupo 1</span><input class="finp" id="f_GRUPO1" type="text" /></div>
-      <div class="fi"><span class="fl">Grupo 2</span><input class="finp" id="f_GRUPO2" type="text" /></div>
+      <div class="fi"><span class="fl">Grupo 1</span><input class="finp" id="f_GRUPO1" type="text"/></div>
+      <div class="fi"><span class="fl">Grupo 2</span><input class="finp" id="f_GRUPO2" type="text"/></div>
     </div>
-
     <div class="stitle">Áreas de conocimiento</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">Área principal</span><input class="finp" id="f_AREA_PRINCIPAL" type="text" /></div>
-      <div class="fi"><span class="fl">Área secundaria</span><input class="finp" id="f_AREA_SECUNDARIA" type="text" /></div>
+      <div class="fi"><span class="fl">Área principal</span><input class="finp" id="f_AREA_PRINCIPAL" type="text"/></div>
+      <div class="fi"><span class="fl">Área secundaria</span><input class="finp" id="f_AREA_SECUNDARIA" type="text"/></div>
     </div>
-
     <div class="stitle">Perfiles académicos</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">ORCID</span><input class="finp url" id="f_ORCID" type="text" placeholder="https://orcid.org/0000-..." /></div>
-      <div class="fi"><span class="fl">CvLAC</span><input class="finp url" id="f_CVLAC" type="text" placeholder="https://scienti.minciencias..." /></div>
-      <div class="fi"><span class="fl">LinkedIn</span><input class="finp url" id="f_LINKEDIN" type="text" placeholder="https://linkedin.com/in/..." /></div>
+      <div class="fi"><span class="fl">ORCID</span><input class="finp url" id="f_ORCID" type="text" placeholder="https://orcid.org/0000-..."/></div>
+      <div class="fi"><span class="fl">CvLAC</span><input class="finp url" id="f_CVLAC" type="text" placeholder="https://scienti.minciencias..."/></div>
+      <div class="fi"><span class="fl">LinkedIn</span><input class="finp url" id="f_LINKEDIN" type="text" placeholder="https://linkedin.com/in/..."/></div>
     </div>
-
     <div class="stitle">Hoja de vida</div>
     <div class="fi">
       <span class="fl">Subir hoja de vida (PDF — máx. 10 MB)</span>
       <div class="upload-zone">
-        <input type="file" id="hvFile" accept="application/pdf" onchange="handleHV(this)" />
+        <input type="file" id="hvFile" accept="application/pdf" onchange="handleHV(this)"/>
         <div class="up-icon hv"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></div>
         <div class="up-text">
           <strong id="hvLabel">Haz clic para seleccionar el PDF</strong>
@@ -210,9 +187,8 @@
         <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
         <a id="pdfLink" href="#" target="_blank">Ver hoja de vida actual en Drive</a>
       </div>
-      <input id="f_HOJA_DE_VIDA" type="hidden" />
+      <input id="f_HOJA_DE_VIDA" type="hidden"/>
     </div>
-
     <div class="arow">
       <div id="saveLoad" class="lrow"><span class="spinner"></span> <span class="save-lbl" id="saveLbl">Guardando...</span></div>
       <div id="saveMsg" class="save-msg msg"></div>
@@ -220,179 +196,126 @@
       <button class="btn btn-green" id="saveBtn" onclick="guardar()">Guardar cambios</button>
     </div>
   </div>
-
   <div class="footer">Maestría en TIC Aplicadas a la Educación · UFPS · Sistema de gestión de directores</div>
 </div>
-
 <script>
 const GAS = "https://script.google.com/macros/s/AKfycbzpqriICwVL3AUci1kTHWBf7VC7FB-8FalP2ZNDouFHUPFYMFXHwNy4kQEgiJV3ji2l/exec";
+const CAMPOS = ["DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR","FOTOGRAFIA","PREGRADO","ESPECIALIZACION","MAESTRIA","DOCTORADO","GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA","HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN"];
+let filaActual=null, docDirector="";
+const $=id=>document.getElementById(id);
+const loader=(id,v)=>$(id).style.display=v?"flex":"none";
+const hideEl=id=>$(id).style.display="none";
+function showMsg(id,txt,tipo){const e=$(id);e.className="msg msg-"+tipo;e.textContent=txt;e.style.display="block";}
+function setBadge(id,txt,tipo){const b=$(id);b.className="up-badge "+tipo;b.innerHTML=(tipo==="uploading"||tipo==="waiting")?`<span class="up-spin"></span>${txt}`:txt;b.style.display="inline-flex";}
+function setProgress(p,pct){$(p+"ProgWrap").style.display=pct>0?"block":"none";$(p+"ProgBar").style.width=Math.min(pct,100)+"%";}
+function iniciales(n){const p=(n||"").trim().split(" ");return((p[0]?.[0]||"")+(p[1]?.[0]||"")).toUpperCase()||"--";}
+function setAvatar(nombre,foto){const d=$("avaDiv");if(foto&&foto.startsWith("http")){d.innerHTML=`<img src="${foto}" alt="foto" onerror="this.parentNode.innerHTML='<span>${iniciales(nombre)}</span>'" />`;}else{d.innerHTML=`<span>${iniciales(nombre)}</span>`;}}
+function toBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result.split(",")[1]);r.onerror=rej;r.readAsDataURL(file);});}
+function handleFoto(input){const f=input.files[0];if(!f)return;if(f.size>5*1024*1024){setBadge("fotoBadge","Muy grande (máx 5 MB)","err");return;}const r=new FileReader();r.onload=e=>{$("fotoPrev").src=e.target.result;$("fotoPrev").style.display="block";$("fotoLabel").textContent=f.name;setBadge("fotoBadge","Lista para subir","ok");};r.readAsDataURL(f);}
+function handleHV(input){const f=input.files[0];if(!f)return;if(f.size>10*1024*1024){setBadge("hvBadge","Muy grande (máx 10 MB)","err");return;}$("hvLabel").textContent=f.name;setBadge("hvBadge","Lista para subir","ok");}
 
-const CAMPOS = ["DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR",
-  "FOTOGRAFIA","PREGRADO","ESPECIALIZACION","MAESTRIA","DOCTORADO",
-  "GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA","HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN"];
+async function encolarArchivo(file,action,documento,fila,badgeId,progPrefix){
+  setBadge(badgeId,"Enviando...","uploading");setProgress(progPrefix,20);
+  const base64=await toBase64(file);
+  const extension=file.name.split(".").pop().toLowerCase();
+  setProgress(progPrefix,60);
+  const res=await fetch(GAS,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({action,base64,mimeType:file.type,extension,documento,fila})});
+  setProgress(progPrefix,100);setTimeout(()=>setProgress(progPrefix,0),500);
+  return res.json();
+}
 
-let filaActual = null, docDirector = "";
-
-const $ = id => document.getElementById(id);
-const loader = (id,v) => $(id).style.display = v ? "flex" : "none";
-const hideEl = id => $(id).style.display = "none";
-
-function showMsg(id, texto, tipo) {
-  const e=$(id); e.className="msg msg-"+tipo; e.textContent=texto; e.style.display="block";
-}
-function setBadge(id, texto, tipo) {
-  const b=$(id); b.className="up-badge "+tipo;
-  b.innerHTML = tipo==="uploading" ? `<span class="up-spin"></span>${texto}` : texto;
-  b.style.display="inline-flex";
-}
-function setProgress(p, pct) {
-  $(p+"ProgWrap").style.display = pct>0 ? "block" : "none";
-  $(p+"ProgBar").style.width = Math.min(pct,100)+"%";
-}
-function iniciales(n) {
-  const p=(n||"").trim().split(" ");
-  return ((p[0]?.[0]||"")+(p[1]?.[0]||"")).toUpperCase()||"--";
-}
-function setAvatar(nombre, foto) {
-  const d=$("avaDiv");
-  if (foto&&foto.startsWith("http")) {
-    d.innerHTML=`<img src="${foto}" alt="foto" onerror="this.parentNode.innerHTML='<span>${iniciales(nombre)}</span>'" />`;
-  } else {
-    d.innerHTML=`<span>${iniciales(nombre)}</span>`;
+async function esperarArchivo(documento,tipo,badgeId,maxSeg=90){
+  setBadge(badgeId,"Procesando en Drive...","waiting");
+  const inicio=Date.now();
+  while((Date.now()-inicio)<maxSeg*1000){
+    await new Promise(r=>setTimeout(r,5000));
+    try{
+      const res=await fetch(GAS+"?action=estadoArchivo&documento="+encodeURIComponent(documento)+"&tipo="+tipo);
+      const json=await res.json();
+      if(json.ok&&json.listo&&json.url)return json.url;
+    }catch(e){}
   }
-}
-function toBase64(file) {
-  return new Promise((res,rej) => {
-    const r=new FileReader();
-    r.onload=e=>res(e.target.result.split(",")[1]);
-    r.onerror=rej;
-    r.readAsDataURL(file);
-  });
+  return null;
 }
 
-function handleFoto(input) {
-  const file=input.files[0]; if(!file) return;
-  if(file.size>5*1024*1024){setBadge("fotoBadge","Muy grande (máx 5 MB)","err");return;}
-  const r=new FileReader();
-  r.onload=e=>{ $("fotoPrev").src=e.target.result; $("fotoPrev").style.display="block"; $("fotoLabel").textContent=file.name; setBadge("fotoBadge","Lista para subir","ok"); };
-  r.readAsDataURL(file);
-}
-function handleHV(input) {
-  const file=input.files[0]; if(!file) return;
-  if(file.size>10*1024*1024){setBadge("hvBadge","Muy grande (máx 10 MB)","err");return;}
-  $("hvLabel").textContent=file.name; setBadge("hvBadge","Lista para subir","ok");
-}
-
-async function subirArchivo(file, action, documento, badgeId, progPrefix) {
-  setBadge(badgeId,"Subiendo...","uploading"); setProgress(progPrefix,20);
-  const base64 = await toBase64(file);
-  const extension = file.name.split(".").pop().toLowerCase();
-  setProgress(progPrefix,50);
-  const res = await fetch(GAS, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain" },
-    body: JSON.stringify({ action, base64, mimeType: file.type, extension, documento })
-  });
-  setProgress(progPrefix,90);
-  const json = await res.json();
-  setProgress(progPrefix,100);
-  setTimeout(()=>setProgress(progPrefix,0),500);
-  return json;
-}
-
-async function buscar() {
+async function buscar(){
   const q=$("qInput").value.trim();
   if(!q){showMsg("sMsg","Ingresa tu documento, código o correo.","err");return;}
-  hideEl("sMsg"); hideEl("saveMsg"); $("profileCard").style.display="none";
-  loader("sLoad",true); $("searchBtn").disabled=true;
-  try {
-    const res  = await fetch(GAS+"?action=buscar&query="+encodeURIComponent(q.toLowerCase()));
-    const json = await res.json();
-    loader("sLoad",false); $("searchBtn").disabled=false;
-    // Compatible con ambas estructuras de respuesta
-    if (!json.ok) { showMsg("sMsg","No se encontró ningún registro. Verifica e intenta de nuevo.","err"); return; }
-    cargarPerfil(json.data, json.fila);
-  } catch(e) {
-    loader("sLoad",false); $("searchBtn").disabled=false;
-    showMsg("sMsg","Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.","err");
-  }
+  hideEl("sMsg");hideEl("saveMsg");$("profileCard").style.display="none";
+  loader("sLoad",true);$("searchBtn").disabled=true;
+  try{
+    const res=await fetch(GAS+"?action=buscar&query="+encodeURIComponent(q.toLowerCase()));
+    const json=await res.json();
+    loader("sLoad",false);$("searchBtn").disabled=false;
+    if(!json.ok){showMsg("sMsg","No se encontró ningún registro. Verifica e intenta de nuevo.","err");return;}
+    cargarPerfil(json.data,json.fila);
+  }catch(e){loader("sLoad",false);$("searchBtn").disabled=false;showMsg("sMsg","Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.","err");}
 }
 
-function cargarPerfil(data, fila) {
-  filaActual=fila; docDirector=String(data["DOCUMENTO"]||"").trim();
-  CAMPOS.forEach(c=>{const el=$("f_"+c); if(el) el.value=data[c]||"";});
+function cargarPerfil(data,fila){
+  filaActual=fila;docDirector=String(data["DOCUMENTO"]||"").trim();
+  CAMPOS.forEach(c=>{const el=$("f_"+c);if(el)el.value=data[c]||"";});
   $("pName").textContent=data["NOMBRE_DIRECTOR"]||"Sin nombre";
   $("pSub").textContent=data["CORREO_DIRECTOR"]||data["DOCUMENTO"]||"";
-  setAvatar(data["NOMBRE_DIRECTOR"], data["FOTOGRAFIA"]);
-
-  if(data["FOTOGRAFIA"]?.startsWith("http")){
-    $("fotoPrev").src=data["FOTOGRAFIA"]; $("fotoPrev").style.display="block";
-    $("fotoLabel").textContent=docDirector+" (foto actual)";
-    setBadge("fotoBadge","Guardada en Drive","ok");
-  } else { $("fotoPrev").style.display="none"; $("fotoLabel").textContent="Haz clic para seleccionar una foto"; hideEl("fotoBadge"); }
-
-  if(data["HOJA_DE_VIDA"]?.startsWith("http")){
-    $("pdfLink").href=data["HOJA_DE_VIDA"]; $("pdfLinkRow").style.display="flex";
-    $("hvLabel").textContent=docDirector+" (HV actual)";
-    setBadge("hvBadge","Guardada en Drive","ok");
-  } else { $("pdfLinkRow").style.display="none"; $("hvLabel").textContent="Haz clic para seleccionar el PDF"; hideEl("hvBadge"); }
-
-  $("profileCard").style.display="block";
-  $("fotoFile").value=""; $("hvFile").value="";
+  setAvatar(data["NOMBRE_DIRECTOR"],data["FOTOGRAFIA"]);
+  if(data["FOTOGRAFIA"]?.startsWith("http")){$("fotoPrev").src=data["FOTOGRAFIA"];$("fotoPrev").style.display="block";$("fotoLabel").textContent=docDirector+" (foto actual)";setBadge("fotoBadge","Guardada en Drive","ok");}
+  else{$("fotoPrev").style.display="none";$("fotoLabel").textContent="Haz clic para seleccionar una foto";hideEl("fotoBadge");}
+  if(data["HOJA_DE_VIDA"]?.startsWith("http")){$("pdfLink").href=data["HOJA_DE_VIDA"];$("pdfLinkRow").style.display="flex";$("hvLabel").textContent=docDirector+" (HV actual)";setBadge("hvBadge","Guardada en Drive","ok");}
+  else{$("pdfLinkRow").style.display="none";$("hvLabel").textContent="Haz clic para seleccionar el PDF";hideEl("hvBadge");}
+  $("profileCard").style.display="block";$("fotoFile").value="";$("hvFile").value="";
   setTimeout(()=>$("profileCard").scrollIntoView({behavior:"smooth",block:"start"}),100);
 }
 
-function limpiar() {
-  $("profileCard").style.display="none"; $("qInput").value="";
-  hideEl("sMsg"); hideEl("saveMsg"); filaActual=null; docDirector="";
-  $("fotoPrev").style.display="none"; $("pdfLinkRow").style.display="none";
-  hideEl("fotoBadge"); hideEl("hvBadge");
+function limpiar(){
+  $("profileCard").style.display="none";$("qInput").value="";hideEl("sMsg");hideEl("saveMsg");
+  filaActual=null;docDirector="";$("fotoPrev").style.display="none";$("pdfLinkRow").style.display="none";
+  hideEl("fotoBadge");hideEl("hvBadge");
   $("fotoLabel").textContent="Haz clic para seleccionar una foto";
   $("hvLabel").textContent="Haz clic para seleccionar el PDF";
-  setProgress("foto",0); setProgress("hv",0);
+  setProgress("foto",0);setProgress("hv",0);
 }
 
-async function guardar() {
-  if(!filaActual) return;
+async function guardar(){
+  if(!filaActual)return;
   const docActual=$("f_DOCUMENTO").value.trim()||docDirector;
-  hideEl("saveMsg"); loader("saveLoad",true); $("saveBtn").disabled=true;
+  hideEl("saveMsg");loader("saveLoad",true);$("saveBtn").disabled=true;
 
-  // 1. Subir foto
   const fotoFile=$("fotoFile").files[0];
   if(fotoFile){
-    $("saveLbl").textContent="Subiendo fotografía...";
-    try {
-      const r=await subirArchivo(fotoFile,"subirFoto",docActual,"fotoBadge","foto");
-      if(r.ok){ $("f_FOTOGRAFIA").value=r.url; $("fotoPrev").src=r.url; $("fotoPrev").style.display="block"; setBadge("fotoBadge","Guardada en Drive ✓","ok"); setAvatar($("f_NOMBRE_DIRECTOR").value,r.url); }
-      else setBadge("fotoBadge","Error: "+(r.msg||"no se pudo subir"),"err");
-    } catch(e){ setBadge("fotoBadge","Error al subir foto","err"); }
+    $("saveLbl").textContent="Enviando fotografía...";
+    try{
+      const r=await encolarArchivo(fotoFile,"subirFoto",docActual,filaActual,"fotoBadge","foto");
+      if(r.ok){
+        const url=await esperarArchivo(docActual,"foto","fotoBadge");
+        if(url){$("f_FOTOGRAFIA").value=url;$("fotoPrev").src=url;$("fotoPrev").style.display="block";setBadge("fotoBadge","Guardada en Drive ✓","ok");setAvatar($("f_NOMBRE_DIRECTOR").value,url);}
+        else setBadge("fotoBadge","En cola — se procesará en segundos","waiting");
+      }else setBadge("fotoBadge","Error: "+(r.msg||"no se pudo enviar"),"err");
+    }catch(e){setBadge("fotoBadge","Error al enviar foto","err");}
   }
 
-  // 2. Subir HV
   const hvFile=$("hvFile").files[0];
   if(hvFile){
-    $("saveLbl").textContent="Subiendo hoja de vida...";
-    try {
-      const r=await subirArchivo(hvFile,"subirHV",docActual,"hvBadge","hv");
-      if(r.ok){ $("f_HOJA_DE_VIDA").value=r.url; $("pdfLink").href=r.url; $("pdfLinkRow").style.display="flex"; setBadge("hvBadge","Guardada en Drive ✓","ok"); }
-      else setBadge("hvBadge","Error: "+(r.msg||"no se pudo subir"),"err");
-    } catch(e){ setBadge("hvBadge","Error al subir PDF","err"); }
+    $("saveLbl").textContent="Enviando hoja de vida...";
+    try{
+      const r=await encolarArchivo(hvFile,"subirHV",docActual,filaActual,"hvBadge","hv");
+      if(r.ok){
+        const url=await esperarArchivo(docActual,"hv","hvBadge");
+        if(url){$("f_HOJA_DE_VIDA").value=url;$("pdfLink").href=url;$("pdfLinkRow").style.display="flex";setBadge("hvBadge","Guardada en Drive ✓","ok");}
+        else setBadge("hvBadge","En cola — se procesará en segundos","waiting");
+      }else setBadge("hvBadge","Error: "+(r.msg||"no se pudo enviar"),"err");
+    }catch(e){setBadge("hvBadge","Error al enviar PDF","err");}
   }
 
-  // 3. Guardar campos en Sheets
   $("saveLbl").textContent="Guardando en Google Sheets...";
   const campos={};
-  CAMPOS.forEach(c=>{const el=$("f_"+c); if(el) campos[c]=el.value.trim();});
-  try {
-    const res  = await fetch(GAS+"?action=actualizar&fila="+filaActual+"&campos="+encodeURIComponent(JSON.stringify(campos)));
-    const json = await res.json();
-    loader("saveLoad",false); $("saveBtn").disabled=false; $("saveLbl").textContent="Guardando...";
-    if(json.ok){ showMsg("saveMsg","Perfil actualizado correctamente en Google Sheets.","ok"); $("pName").textContent=campos["NOMBRE_DIRECTOR"]||"Sin nombre"; $("pSub").textContent=campos["CORREO_DIRECTOR"]||""; setAvatar(campos["NOMBRE_DIRECTOR"],campos["FOTOGRAFIA"]); docDirector=docActual; }
+  CAMPOS.forEach(c=>{const el=$("f_"+c);if(el)campos[c]=el.value.trim();});
+  try{
+    const res=await fetch(GAS+"?action=actualizar&fila="+filaActual+"&campos="+encodeURIComponent(JSON.stringify(campos)));
+    const json=await res.json();
+    loader("saveLoad",false);$("saveBtn").disabled=false;$("saveLbl").textContent="Guardando...";
+    if(json.ok){showMsg("saveMsg","Perfil actualizado correctamente en Google Sheets.","ok");$("pName").textContent=campos["NOMBRE_DIRECTOR"]||"Sin nombre";$("pSub").textContent=campos["CORREO_DIRECTOR"]||"";setAvatar(campos["NOMBRE_DIRECTOR"],campos["FOTOGRAFIA"]);docDirector=docActual;}
     else showMsg("saveMsg","No se pudo guardar. Intenta de nuevo.","err");
-  } catch(e){
-    loader("saveLoad",false); $("saveBtn").disabled=false; $("saveLbl").textContent="Guardando...";
-    showMsg("saveMsg","Error de conexión al guardar.","err");
-  }
+  }catch(e){loader("saveLoad",false);$("saveBtn").disabled=false;$("saveLbl").textContent="Guardando...";showMsg("saveMsg","Error de conexión al guardar.","err");}
 }
 
 $("qInput").addEventListener("keydown",e=>{if(e.key==="Enter")buscar();});
