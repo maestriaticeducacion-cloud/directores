@@ -69,7 +69,6 @@
   .finp.url { color: var(--blue); }
   .full { grid-column: span 2; }
 
-  /* Upload zones */
   .upload-zone { border: 1.5px dashed var(--gray-200); border-radius: var(--radius-sm); padding: 1rem; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: border-color .15s, background .15s; background: var(--gray-50); position: relative; }
   .upload-zone:hover { border-color: var(--blue); background: var(--blue-light); }
   .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
@@ -98,7 +97,6 @@
   .arow { display: flex; gap: 10px; justify-content: flex-end; align-items: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--gray-100); flex-wrap: wrap; }
   .save-msg { font-size: 13px; padding: 8px 12px; border-radius: var(--radius-sm); display: none; flex: 1; min-width: 180px; }
   .save-lbl { font-size: 13px; color: var(--gray-400); }
-
   .footer { text-align: center; font-size: 12px; color: var(--gray-400); margin-top: 2rem; }
 
   @media (max-width: 540px) {
@@ -110,11 +108,8 @@
 </style>
 </head>
 <body>
-
 <div class="topbar">
-  <div class="topbar-logo">
-    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
-  </div>
+  <div class="topbar-logo"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
   <span class="topbar-title">Maestría en TIC Aplicadas a la Educación</span>
   <span class="topbar-sub">Universidad Francisco de Paula Santander</span>
 </div>
@@ -125,7 +120,6 @@
     <p>Consulta y actualiza tu información en el registro institucional de la maestría.</p>
   </div>
 
-  <!-- Búsqueda -->
   <div class="card">
     <span class="search-label">Ingresa tu documento, código o correo institucional para cargar tu perfil</span>
     <div class="search-row">
@@ -136,13 +130,12 @@
     <div id="sMsg" class="msg"></div>
   </div>
 
-  <!-- Perfil -->
   <div class="card profile" id="profileCard">
     <div class="phead">
       <div class="ava" id="avaDiv"><span>--</span></div>
       <div>
         <div class="pname" id="pName">—</div>
-        <div class="psub"  id="pSub">—</div>
+        <div class="psub" id="pSub">—</div>
         <span class="badge">Director de Maestría · UFPS</span>
       </div>
     </div>
@@ -195,8 +188,8 @@
 
     <div class="stitle">Perfiles académicos</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">ORCID</span><input class="finp url" id="f_ORCID"    type="text" placeholder="https://orcid.org/0000-..." /></div>
-      <div class="fi"><span class="fl">CvLAC</span><input class="finp url" id="f_CVLAC"   type="text" placeholder="https://scienti.minciencias..." /></div>
+      <div class="fi"><span class="fl">ORCID</span><input class="finp url" id="f_ORCID" type="text" placeholder="https://orcid.org/0000-..." /></div>
+      <div class="fi"><span class="fl">CvLAC</span><input class="finp url" id="f_CVLAC" type="text" placeholder="https://scienti.minciencias..." /></div>
       <div class="fi"><span class="fl">LinkedIn</span><input class="finp url" id="f_LINKEDIN" type="text" placeholder="https://linkedin.com/in/..." /></div>
     </div>
 
@@ -234,260 +227,175 @@
 <script>
 const GAS = "https://script.google.com/macros/s/AKfycbzpqriICwVL3AUci1kTHWBf7VC7FB-8FalP2ZNDouFHUPFYMFXHwNy4kQEgiJV3ji2l/exec";
 
-const CAMPOS = [
-  "DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR",
+const CAMPOS = ["DOCUMENTO","CODIGO","NOMBRE_DIRECTOR","TELEFONO","CORREO_DIRECTOR",
   "FOTOGRAFIA","PREGRADO","ESPECIALIZACION","MAESTRIA","DOCTORADO",
-  "GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA",
-  "HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN"
-];
+  "GRUPO1","GRUPO2","AREA_PRINCIPAL","AREA_SECUNDARIA","HOJA_DE_VIDA","ORCID","CVLAC","LINKEDIN"];
 
-let filaActual  = null;
-let docDirector = "";
+let filaActual = null, docDirector = "";
 
-const $      = id => document.getElementById(id);
-const loader = (id, v) => $(id).style.display = v ? "flex" : "none";
+const $ = id => document.getElementById(id);
+const loader = (id,v) => $(id).style.display = v ? "flex" : "none";
 const hideEl = id => $(id).style.display = "none";
 
 function showMsg(id, texto, tipo) {
-  const e = $(id);
-  e.className = "msg msg-" + tipo;
-  e.textContent = texto;
-  e.style.display = "block";
+  const e=$(id); e.className="msg msg-"+tipo; e.textContent=texto; e.style.display="block";
 }
-
 function setBadge(id, texto, tipo) {
-  const b = $(id);
-  b.className = "up-badge " + tipo;
-  b.innerHTML = tipo === "uploading" ? `<span class="up-spin"></span>${texto}` : texto;
-  b.style.display = "inline-flex";
+  const b=$(id); b.className="up-badge "+tipo;
+  b.innerHTML = tipo==="uploading" ? `<span class="up-spin"></span>${texto}` : texto;
+  b.style.display="inline-flex";
 }
-
-function setProgress(prefix, pct) {
-  $(prefix + "ProgWrap").style.display = pct > 0 ? "block" : "none";
-  $(prefix + "ProgBar").style.width = Math.min(pct, 100) + "%";
+function setProgress(p, pct) {
+  $(p+"ProgWrap").style.display = pct>0 ? "block" : "none";
+  $(p+"ProgBar").style.width = Math.min(pct,100)+"%";
 }
-
 function iniciales(n) {
-  const p = (n||"").trim().split(" ");
+  const p=(n||"").trim().split(" ");
   return ((p[0]?.[0]||"")+(p[1]?.[0]||"")).toUpperCase()||"--";
 }
-
 function setAvatar(nombre, foto) {
-  const d = $("avaDiv");
-  if (foto && foto.startsWith("http")) {
-    d.innerHTML = `<img src="${foto}" alt="foto" onerror="this.parentNode.innerHTML='<span>${iniciales(nombre)}</span>'" />`;
+  const d=$("avaDiv");
+  if (foto&&foto.startsWith("http")) {
+    d.innerHTML=`<img src="${foto}" alt="foto" onerror="this.parentNode.innerHTML='<span>${iniciales(nombre)}</span>'" />`;
   } else {
-    d.innerHTML = `<span>${iniciales(nombre)}</span>`;
+    d.innerHTML=`<span>${iniciales(nombre)}</span>`;
   }
 }
-
-// ── Previsualización local ───────────────────────────────────
-function handleFoto(input) {
-  const file = input.files[0]; if (!file) return;
-  if (file.size > 5 * 1024 * 1024) { setBadge("fotoBadge", "Muy grande (máx 5 MB)", "err"); return; }
-  const reader = new FileReader();
-  reader.onload = e => {
-    $("fotoPrev").src = e.target.result;
-    $("fotoPrev").style.display = "block";
-    $("fotoLabel").textContent = file.name;
-    setBadge("fotoBadge", "Lista para subir", "ok");
-  };
-  reader.readAsDataURL(file);
-}
-
-function handleHV(input) {
-  const file = input.files[0]; if (!file) return;
-  if (file.size > 10 * 1024 * 1024) { setBadge("hvBadge", "Muy grande (máx 10 MB)", "err"); return; }
-  $("hvLabel").textContent = file.name;
-  setBadge("hvBadge", "Lista para subir", "ok");
-}
-
-// ── Leer archivo como base64 ─────────────────────────────────
 function toBase64(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload  = e => res(e.target.result.split(",")[1]);
-    r.onerror = rej;
+  return new Promise((res,rej) => {
+    const r=new FileReader();
+    r.onload=e=>res(e.target.result.split(",")[1]);
+    r.onerror=rej;
     r.readAsDataURL(file);
   });
 }
 
-// ── Subir archivo via POST ───────────────────────────────────
+function handleFoto(input) {
+  const file=input.files[0]; if(!file) return;
+  if(file.size>5*1024*1024){setBadge("fotoBadge","Muy grande (máx 5 MB)","err");return;}
+  const r=new FileReader();
+  r.onload=e=>{ $("fotoPrev").src=e.target.result; $("fotoPrev").style.display="block"; $("fotoLabel").textContent=file.name; setBadge("fotoBadge","Lista para subir","ok"); };
+  r.readAsDataURL(file);
+}
+function handleHV(input) {
+  const file=input.files[0]; if(!file) return;
+  if(file.size>10*1024*1024){setBadge("hvBadge","Muy grande (máx 10 MB)","err");return;}
+  $("hvLabel").textContent=file.name; setBadge("hvBadge","Lista para subir","ok");
+}
+
 async function subirArchivo(file, action, documento, badgeId, progPrefix) {
-  setBadge(badgeId, "Leyendo archivo...", "uploading");
-  setProgress(progPrefix, 10);
-
-  const base64    = await toBase64(file);
+  setBadge(badgeId,"Subiendo...","uploading"); setProgress(progPrefix,20);
+  const base64 = await toBase64(file);
   const extension = file.name.split(".").pop().toLowerCase();
-
-  setBadge(badgeId, "Subiendo a Drive...", "uploading");
-  setProgress(progPrefix, 40);
-
-  const res  = await fetch(GAS, {
-    method:  "POST",
-    headers: { "Content-Type": "text/plain" }, // text/plain evita el preflight CORS
+  setProgress(progPrefix,50);
+  const res = await fetch(GAS, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain" },
     body: JSON.stringify({ action, base64, mimeType: file.type, extension, documento })
   });
-
-  setProgress(progPrefix, 90);
+  setProgress(progPrefix,90);
   const json = await res.json();
-  setProgress(progPrefix, 100);
-  setTimeout(() => setProgress(progPrefix, 0), 600);
+  setProgress(progPrefix,100);
+  setTimeout(()=>setProgress(progPrefix,0),500);
   return json;
 }
 
-// ── Buscar ───────────────────────────────────────────────────
 async function buscar() {
-  const q = $("qInput").value.trim();
-  if (!q) { showMsg("sMsg", "Ingresa tu documento, código o correo.", "err"); return; }
-  hideEl("sMsg"); hideEl("saveMsg");
-  $("profileCard").style.display = "none";
-  loader("sLoad", true);
-  $("searchBtn").disabled = true;
-
+  const q=$("qInput").value.trim();
+  if(!q){showMsg("sMsg","Ingresa tu documento, código o correo.","err");return;}
+  hideEl("sMsg"); hideEl("saveMsg"); $("profileCard").style.display="none";
+  loader("sLoad",true); $("searchBtn").disabled=true;
   try {
-    const url  = GAS + "?action=buscar&query=" + encodeURIComponent(q.toLowerCase());
-    const res  = await fetch(url);
+    const res  = await fetch(GAS+"?action=buscar&query="+encodeURIComponent(q.toLowerCase()));
     const json = await res.json();
-    loader("sLoad", false);
-    $("searchBtn").disabled = false;
-
-    if (!json.ok || !json.data?.found) {
-      showMsg("sMsg", "No se encontró ningún registro. Verifica e intenta de nuevo.", "err");
-      return;
-    }
-    cargarPerfil(json.data.data, json.data.fila);
+    loader("sLoad",false); $("searchBtn").disabled=false;
+    // Compatible con ambas estructuras de respuesta
+    if (!json.ok) { showMsg("sMsg","No se encontró ningún registro. Verifica e intenta de nuevo.","err"); return; }
+    cargarPerfil(json.data, json.fila);
   } catch(e) {
-    loader("sLoad", false);
-    $("searchBtn").disabled = false;
-    showMsg("sMsg", "Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.", "err");
+    loader("sLoad",false); $("searchBtn").disabled=false;
+    showMsg("sMsg","Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.","err");
   }
 }
 
 function cargarPerfil(data, fila) {
-  filaActual  = fila;
-  docDirector = String(data["DOCUMENTO"] || "").trim();
-  CAMPOS.forEach(c => { const el = $("f_" + c); if (el) el.value = data[c] || ""; });
-  $("pName").textContent = data["NOMBRE_DIRECTOR"] || "Sin nombre";
-  $("pSub").textContent  = data["CORREO_DIRECTOR"]  || data["DOCUMENTO"] || "";
+  filaActual=fila; docDirector=String(data["DOCUMENTO"]||"").trim();
+  CAMPOS.forEach(c=>{const el=$("f_"+c); if(el) el.value=data[c]||"";});
+  $("pName").textContent=data["NOMBRE_DIRECTOR"]||"Sin nombre";
+  $("pSub").textContent=data["CORREO_DIRECTOR"]||data["DOCUMENTO"]||"";
   setAvatar(data["NOMBRE_DIRECTOR"], data["FOTOGRAFIA"]);
 
-  if (data["FOTOGRAFIA"]?.startsWith("http")) {
-    $("fotoPrev").src = data["FOTOGRAFIA"];
-    $("fotoPrev").style.display = "block";
-    $("fotoLabel").textContent = docDirector + " (foto actual)";
-    setBadge("fotoBadge", "Guardada en Drive", "ok");
-  } else {
-    $("fotoPrev").style.display = "none";
-    $("fotoLabel").textContent = "Haz clic para seleccionar una foto";
-    hideEl("fotoBadge");
-  }
+  if(data["FOTOGRAFIA"]?.startsWith("http")){
+    $("fotoPrev").src=data["FOTOGRAFIA"]; $("fotoPrev").style.display="block";
+    $("fotoLabel").textContent=docDirector+" (foto actual)";
+    setBadge("fotoBadge","Guardada en Drive","ok");
+  } else { $("fotoPrev").style.display="none"; $("fotoLabel").textContent="Haz clic para seleccionar una foto"; hideEl("fotoBadge"); }
 
-  if (data["HOJA_DE_VIDA"]?.startsWith("http")) {
-    $("pdfLink").href = data["HOJA_DE_VIDA"];
-    $("pdfLinkRow").style.display = "flex";
-    $("hvLabel").textContent = docDirector + " (HV actual)";
-    setBadge("hvBadge", "Guardada en Drive", "ok");
-  } else {
-    $("pdfLinkRow").style.display = "none";
-    $("hvLabel").textContent = "Haz clic para seleccionar el PDF";
-    hideEl("hvBadge");
-  }
+  if(data["HOJA_DE_VIDA"]?.startsWith("http")){
+    $("pdfLink").href=data["HOJA_DE_VIDA"]; $("pdfLinkRow").style.display="flex";
+    $("hvLabel").textContent=docDirector+" (HV actual)";
+    setBadge("hvBadge","Guardada en Drive","ok");
+  } else { $("pdfLinkRow").style.display="none"; $("hvLabel").textContent="Haz clic para seleccionar el PDF"; hideEl("hvBadge"); }
 
-  $("profileCard").style.display = "block";
-  $("fotoFile").value = "";
-  $("hvFile").value   = "";
-  setTimeout(() => $("profileCard").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  $("profileCard").style.display="block";
+  $("fotoFile").value=""; $("hvFile").value="";
+  setTimeout(()=>$("profileCard").scrollIntoView({behavior:"smooth",block:"start"}),100);
 }
 
 function limpiar() {
-  $("profileCard").style.display = "none";
-  $("qInput").value = "";
-  hideEl("sMsg"); hideEl("saveMsg");
-  filaActual = null; docDirector = "";
-  $("fotoPrev").style.display = "none";
-  $("pdfLinkRow").style.display = "none";
+  $("profileCard").style.display="none"; $("qInput").value="";
+  hideEl("sMsg"); hideEl("saveMsg"); filaActual=null; docDirector="";
+  $("fotoPrev").style.display="none"; $("pdfLinkRow").style.display="none";
   hideEl("fotoBadge"); hideEl("hvBadge");
-  $("fotoLabel").textContent = "Haz clic para seleccionar una foto";
-  $("hvLabel").textContent   = "Haz clic para seleccionar el PDF";
-  setProgress("foto", 0); setProgress("hv", 0);
+  $("fotoLabel").textContent="Haz clic para seleccionar una foto";
+  $("hvLabel").textContent="Haz clic para seleccionar el PDF";
+  setProgress("foto",0); setProgress("hv",0);
 }
 
-// ── Guardar ──────────────────────────────────────────────────
 async function guardar() {
-  if (!filaActual) return;
-  const docActual = $("f_DOCUMENTO").value.trim() || docDirector;
-  hideEl("saveMsg"); loader("saveLoad", true); $("saveBtn").disabled = true;
+  if(!filaActual) return;
+  const docActual=$("f_DOCUMENTO").value.trim()||docDirector;
+  hideEl("saveMsg"); loader("saveLoad",true); $("saveBtn").disabled=true;
 
-  // 1. Subir foto si hay nueva
-  const fotoFile = $("fotoFile").files[0];
-  if (fotoFile) {
-    $("saveLbl").textContent = "Subiendo fotografía...";
+  // 1. Subir foto
+  const fotoFile=$("fotoFile").files[0];
+  if(fotoFile){
+    $("saveLbl").textContent="Subiendo fotografía...";
     try {
-      const r = await subirArchivo(fotoFile, "subirFoto", docActual, "fotoBadge", "foto");
-      if (r.ok) {
-        $("f_FOTOGRAFIA").value = r.url;
-        $("fotoPrev").src = r.url;
-        $("fotoPrev").style.display = "block";
-        setBadge("fotoBadge", "Guardada en Drive ✓", "ok");
-        setAvatar($("f_NOMBRE_DIRECTOR").value, r.url);
-      } else {
-        setBadge("fotoBadge", "Error: " + (r.msg || "no se pudo subir"), "err");
-      }
-    } catch(e) {
-      setBadge("fotoBadge", "Error al subir foto", "err");
-    }
+      const r=await subirArchivo(fotoFile,"subirFoto",docActual,"fotoBadge","foto");
+      if(r.ok){ $("f_FOTOGRAFIA").value=r.url; $("fotoPrev").src=r.url; $("fotoPrev").style.display="block"; setBadge("fotoBadge","Guardada en Drive ✓","ok"); setAvatar($("f_NOMBRE_DIRECTOR").value,r.url); }
+      else setBadge("fotoBadge","Error: "+(r.msg||"no se pudo subir"),"err");
+    } catch(e){ setBadge("fotoBadge","Error al subir foto","err"); }
   }
 
-  // 2. Subir HV si hay nuevo PDF
-  const hvFile = $("hvFile").files[0];
-  if (hvFile) {
-    $("saveLbl").textContent = "Subiendo hoja de vida...";
+  // 2. Subir HV
+  const hvFile=$("hvFile").files[0];
+  if(hvFile){
+    $("saveLbl").textContent="Subiendo hoja de vida...";
     try {
-      const r = await subirArchivo(hvFile, "subirHV", docActual, "hvBadge", "hv");
-      if (r.ok) {
-        $("f_HOJA_DE_VIDA").value = r.url;
-        $("pdfLink").href = r.url;
-        $("pdfLinkRow").style.display = "flex";
-        setBadge("hvBadge", "Guardada en Drive ✓", "ok");
-      } else {
-        setBadge("hvBadge", "Error: " + (r.msg || "no se pudo subir"), "err");
-      }
-    } catch(e) {
-      setBadge("hvBadge", "Error al subir PDF", "err");
-    }
+      const r=await subirArchivo(hvFile,"subirHV",docActual,"hvBadge","hv");
+      if(r.ok){ $("f_HOJA_DE_VIDA").value=r.url; $("pdfLink").href=r.url; $("pdfLinkRow").style.display="flex"; setBadge("hvBadge","Guardada en Drive ✓","ok"); }
+      else setBadge("hvBadge","Error: "+(r.msg||"no se pudo subir"),"err");
+    } catch(e){ setBadge("hvBadge","Error al subir PDF","err"); }
   }
 
-  // 3. Guardar todos los campos en Sheets
-  $("saveLbl").textContent = "Guardando en Google Sheets...";
-  const campos = {};
-  CAMPOS.forEach(c => { const el = $("f_" + c); if (el) campos[c] = el.value.trim(); });
-
+  // 3. Guardar campos en Sheets
+  $("saveLbl").textContent="Guardando en Google Sheets...";
+  const campos={};
+  CAMPOS.forEach(c=>{const el=$("f_"+c); if(el) campos[c]=el.value.trim();});
   try {
-    const url  = GAS + "?action=actualizar&fila=" + filaActual + "&campos=" + encodeURIComponent(JSON.stringify(campos));
-    const res  = await fetch(url);
+    const res  = await fetch(GAS+"?action=actualizar&fila="+filaActual+"&campos="+encodeURIComponent(JSON.stringify(campos)));
     const json = await res.json();
-    loader("saveLoad", false); $("saveBtn").disabled = false;
-    $("saveLbl").textContent = "Guardando...";
-
-    if (json.ok) {
-      showMsg("saveMsg", "Perfil actualizado correctamente en Google Sheets.", "ok");
-      $("pName").textContent = campos["NOMBRE_DIRECTOR"] || "Sin nombre";
-      $("pSub").textContent  = campos["CORREO_DIRECTOR"] || "";
-      setAvatar(campos["NOMBRE_DIRECTOR"], campos["FOTOGRAFIA"]);
-      docDirector = docActual;
-    } else {
-      showMsg("saveMsg", "No se pudo guardar. Intenta de nuevo.", "err");
-    }
-  } catch(e) {
-    loader("saveLoad", false); $("saveBtn").disabled = false;
-    $("saveLbl").textContent = "Guardando...";
-    showMsg("saveMsg", "Error de conexión al guardar.", "err");
+    loader("saveLoad",false); $("saveBtn").disabled=false; $("saveLbl").textContent="Guardando...";
+    if(json.ok){ showMsg("saveMsg","Perfil actualizado correctamente en Google Sheets.","ok"); $("pName").textContent=campos["NOMBRE_DIRECTOR"]||"Sin nombre"; $("pSub").textContent=campos["CORREO_DIRECTOR"]||""; setAvatar(campos["NOMBRE_DIRECTOR"],campos["FOTOGRAFIA"]); docDirector=docActual; }
+    else showMsg("saveMsg","No se pudo guardar. Intenta de nuevo.","err");
+  } catch(e){
+    loader("saveLoad",false); $("saveBtn").disabled=false; $("saveLbl").textContent="Guardando...";
+    showMsg("saveMsg","Error de conexión al guardar.","err");
   }
 }
 
-$("qInput").addEventListener("keydown", e => { if (e.key === "Enter") buscar(); });
+$("qInput").addEventListener("keydown",e=>{if(e.key==="Enter")buscar();});
 </script>
 </body>
 </html>
-
