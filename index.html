@@ -73,7 +73,6 @@
   .up-badge{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;display:none;align-items:center;gap:4px;}
   .up-badge.ok{background:var(--green-light);color:var(--green);display:inline-flex;}
   .up-badge.uploading{background:var(--blue-light);color:var(--blue);display:inline-flex;}
-  .up-badge.waiting{background:var(--orange-light);color:var(--orange);display:inline-flex;}
   .up-badge.err{background:var(--red-light);color:var(--red);display:inline-flex;}
   .up-spin{width:10px;height:10px;border:1.5px solid rgba(26,86,160,.3);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;}
   .prog-wrap{height:5px;background:var(--gray-100);border-radius:4px;margin-top:8px;display:none;overflow:hidden;}
@@ -145,50 +144,47 @@
         <span class="up-badge" id="fotoBadge"></span>
       </div>
       <div class="prog-wrap" id="fotoProgWrap"><div class="prog-bar" id="fotoProgBar"></div></div>
-      <input id="f_FOTOGRAFIA" type="hidden"/>
     </div>
-    <div class="stitle">Formación académica</div>
+    <div class="stitle">Hoja de Vida</div>
+    <div class="fi">
+      <span class="fl">Subir hoja de vida (PDF — máx. 10 MB)</span>
+      <div class="upload-zone">
+        <input type="file" id="hvFile" accept="application/pdf" onchange="handleHV(this)"/>
+        <div class="up-icon hv"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg></div>
+        <div class="up-text">
+          <strong id="hvLabel">Haz clic para seleccionar el PDF</strong>
+          <span>PDF · máx. 10 MB</span>
+        </div>
+        <span class="up-badge" id="hvBadge"></span>
+      </div>
+      <div class="prog-wrap" id="hvProgWrap"><div class="prog-bar" id="hvProgBar"></div></div>
+      <div class="pdf-link-row" id="pdfLinkRow">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+        <a id="pdfLink" href="#" target="_blank">Ver hoja de vida actual en Drive</a>
+      </div>
+    </div>
+    <div class="stitle">Formación Académica</div>
     <div class="fgrid">
       <div class="fi"><span class="fl">Pregrado</span><input class="finp" id="f_PREGRADO" type="text"/></div>
       <div class="fi"><span class="fl">Especialización</span><input class="finp" id="f_ESPECIALIZACION" type="text"/></div>
       <div class="fi"><span class="fl">Maestría</span><input class="finp" id="f_MAESTRIA" type="text"/></div>
       <div class="fi"><span class="fl">Doctorado</span><input class="finp" id="f_DOCTORADO" type="text"/></div>
     </div>
-    <div class="stitle">Grupos de investigación</div>
+    <div class="stitle">Grupos de Investigación</div>
     <div class="fgrid">
       <div class="fi"><span class="fl">Grupo 1</span><input class="finp" id="f_GRUPO1" type="text"/></div>
       <div class="fi"><span class="fl">Grupo 2</span><input class="finp" id="f_GRUPO2" type="text"/></div>
-    </div>
-    <div class="stitle">Áreas de conocimiento</div>
-    <div class="fgrid">
       <div class="fi"><span class="fl">Área principal</span><input class="finp" id="f_AREA_PRINCIPAL" type="text"/></div>
       <div class="fi"><span class="fl">Área secundaria</span><input class="finp" id="f_AREA_SECUNDARIA" type="text"/></div>
     </div>
-    <div class="stitle">Perfiles académicos</div>
+    <div class="stitle">Perfiles Académicos</div>
     <div class="fgrid">
-      <div class="fi"><span class="fl">ORCID</span><input class="finp url" id="f_ORCID" type="text" placeholder="https://orcid.org/0000-..."/></div>
+      <div class="fi"><span class="fl">ORCID</span><input class="finp url" id="f_ORCID" type="text" placeholder="https://orcid.org/..."/></div>
       <div class="fi"><span class="fl">CvLAC</span><input class="finp url" id="f_CVLAC" type="text" placeholder="https://scienti.minciencias..."/></div>
-      <div class="fi"><span class="fl">LinkedIn</span><input class="finp url" id="f_LINKEDIN" type="text" placeholder="https://linkedin.com/in/..."/></div>
+      <div class="fi full"><span class="fl">LinkedIn</span><input class="finp url" id="f_LINKEDIN" type="text" placeholder="https://linkedin.com/in/..."/></div>
     </div>
-    <div class="stitle">Hoja de vida</div>
-    <div class="fi">
-      <span class="fl">Subir hoja de vida (PDF — máx. 10 MB)</span>
-      <div class="upload-zone">
-        <input type="file" id="hvFile" accept="application/pdf" onchange="handleHV(this)"/>
-        <div class="up-icon hv"><svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></div>
-        <div class="up-text">
-          <strong id="hvLabel">Haz clic para seleccionar el PDF</strong>
-          <span>Solo PDF · máx. 10 MB</span>
-        </div>
-        <span class="up-badge" id="hvBadge"></span>
-      </div>
-      <div class="prog-wrap" id="hvProgWrap"><div class="prog-bar" id="hvProgBar"></div></div>
-      <div class="pdf-link-row" id="pdfLinkRow">
-        <svg viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-        <a id="pdfLink" href="#" target="_blank">Ver hoja de vida actual en Drive</a>
-      </div>
-      <input id="f_HOJA_DE_VIDA" type="hidden"/>
-    </div>
+    <input id="f_FOTOGRAFIA" type="hidden"/>
+    <input id="f_HOJA_DE_VIDA" type="hidden"/>
     <div class="arow">
       <div id="saveLoad" class="lrow"><span class="spinner"></span> <span class="save-lbl" id="saveLbl">Guardando...</span></div>
       <div id="saveMsg" class="save-msg msg"></div>
@@ -206,36 +202,41 @@ const $=id=>document.getElementById(id);
 const loader=(id,v)=>$(id).style.display=v?"flex":"none";
 const hideEl=id=>$(id).style.display="none";
 function showMsg(id,txt,tipo){const e=$(id);e.className="msg msg-"+tipo;e.textContent=txt;e.style.display="block";}
-function setBadge(id,txt,tipo){const b=$(id);b.className="up-badge "+tipo;b.innerHTML=(tipo==="uploading"||tipo==="waiting")?`<span class="up-spin"></span>${txt}`:txt;b.style.display="inline-flex";}
+function setBadge(id,txt,tipo){const b=$(id);b.className="up-badge "+tipo;b.innerHTML=(tipo==="uploading")?`<span class="up-spin"></span>${txt}`:txt;b.style.display="inline-flex";}
 function setProgress(p,pct){$(p+"ProgWrap").style.display=pct>0?"block":"none";$(p+"ProgBar").style.width=Math.min(pct,100)+"%";}
 function iniciales(n){const p=(n||"").trim().split(" ");return((p[0]?.[0]||"")+(p[1]?.[0]||"")).toUpperCase()||"--";}
 function setAvatar(nombre,foto){const d=$("avaDiv");if(foto&&foto.startsWith("http")){d.innerHTML=`<img src="${foto}" alt="foto" onerror="this.parentNode.innerHTML='<span>${iniciales(nombre)}</span>'" />`;}else{d.innerHTML=`<span>${iniciales(nombre)}</span>`;}}
 function toBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result.split(",")[1]);r.onerror=rej;r.readAsDataURL(file);});}
-function handleFoto(input){const f=input.files[0];if(!f)return;if(f.size>5*1024*1024){setBadge("fotoBadge","Muy grande (máx 5 MB)","err");return;}const r=new FileReader();r.onload=e=>{$("fotoPrev").src=e.target.result;$("fotoPrev").style.display="block";$("fotoLabel").textContent=f.name;setBadge("fotoBadge","Lista para subir","ok");};r.readAsDataURL(f);}
-function handleHV(input){const f=input.files[0];if(!f)return;if(f.size>10*1024*1024){setBadge("hvBadge","Muy grande (máx 10 MB)","err");return;}$("hvLabel").textContent=f.name;setBadge("hvBadge","Lista para subir","ok");}
 
-async function encolarArchivo(file,action,documento,fila,badgeId,progPrefix){
-  setBadge(badgeId,"Enviando...","uploading");setProgress(progPrefix,20);
-  const base64=await toBase64(file);
-  const extension=file.name.split(".").pop().toLowerCase();
-  setProgress(progPrefix,60);
-  const res=await fetch(GAS,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({action,base64,mimeType:file.type,extension,documento,fila})});
-  setProgress(progPrefix,100);setTimeout(()=>setProgress(progPrefix,0),500);
-  return res.json();
+function handleFoto(input){
+  const f=input.files[0];if(!f)return;
+  if(f.size>5*1024*1024){setBadge("fotoBadge","Muy grande (máx 5 MB)","err");return;}
+  const r=new FileReader();
+  r.onload=e=>{$("fotoPrev").src=e.target.result;$("fotoPrev").style.display="block";$("fotoLabel").textContent=f.name;setBadge("fotoBadge","Lista para subir","ok");};
+  r.readAsDataURL(f);
 }
 
-async function esperarArchivo(documento,tipo,badgeId,maxSeg=90){
-  setBadge(badgeId,"Procesando en Drive...","waiting");
-  const inicio=Date.now();
-  while((Date.now()-inicio)<maxSeg*1000){
-    await new Promise(r=>setTimeout(r,5000));
-    try{
-      const res=await fetch(GAS+"?action=estadoArchivo&documento="+encodeURIComponent(documento)+"&tipo="+tipo);
-      const json=await res.json();
-      if(json.ok&&json.listo&&json.url)return json.url;
-    }catch(e){}
-  }
-  return null;
+function handleHV(input){
+  const f=input.files[0];if(!f)return;
+  if(f.size>10*1024*1024){setBadge("hvBadge","Muy grande (máx 10 MB)","err");return;}
+  $("hvLabel").textContent=f.name;setBadge("hvBadge","Lista para subir","ok");
+}
+
+// Sube el archivo y devuelve {ok, url} directamente — sin polling
+async function subirArchivo(file, action, documento, fila, badgeId, progPrefix) {
+  setBadge(badgeId, "Subiendo a Drive...", "uploading");
+  setProgress(progPrefix, 20);
+  const base64 = await toBase64(file);
+  setProgress(progPrefix, 60);
+  const extension = file.name.split(".").pop().toLowerCase();
+  const res = await fetch(GAS, {
+    method: "POST",
+    headers: {"Content-Type":"text/plain"},
+    body: JSON.stringify({action, base64, mimeType:file.type, extension, documento, fila})
+  });
+  setProgress(progPrefix, 100);
+  setTimeout(()=>setProgress(progPrefix,0), 500);
+  return res.json();
 }
 
 async function buscar(){
@@ -249,7 +250,10 @@ async function buscar(){
     loader("sLoad",false);$("searchBtn").disabled=false;
     if(!json.ok){showMsg("sMsg","No se encontró ningún registro. Verifica e intenta de nuevo.","err");return;}
     cargarPerfil(json.data,json.fila);
-  }catch(e){loader("sLoad",false);$("searchBtn").disabled=false;showMsg("sMsg","Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.","err");}
+  }catch(e){
+    loader("sLoad",false);$("searchBtn").disabled=false;
+    showMsg("sMsg","Error de conexión. Verifica que el Apps Script esté publicado con acceso 'Cualquier persona'.","err");
+  }
 }
 
 function cargarPerfil(data,fila){
@@ -258,10 +262,18 @@ function cargarPerfil(data,fila){
   $("pName").textContent=data["NOMBRE_DIRECTOR"]||"Sin nombre";
   $("pSub").textContent=data["CORREO_DIRECTOR"]||data["DOCUMENTO"]||"";
   setAvatar(data["NOMBRE_DIRECTOR"],data["FOTOGRAFIA"]);
-  if(data["FOTOGRAFIA"]?.startsWith("http")){$("fotoPrev").src=data["FOTOGRAFIA"];$("fotoPrev").style.display="block";$("fotoLabel").textContent=docDirector+" (foto actual)";setBadge("fotoBadge","Guardada en Drive","ok");}
-  else{$("fotoPrev").style.display="none";$("fotoLabel").textContent="Haz clic para seleccionar una foto";hideEl("fotoBadge");}
-  if(data["HOJA_DE_VIDA"]?.startsWith("http")){$("pdfLink").href=data["HOJA_DE_VIDA"];$("pdfLinkRow").style.display="flex";$("hvLabel").textContent=docDirector+" (HV actual)";setBadge("hvBadge","Guardada en Drive","ok");}
-  else{$("pdfLinkRow").style.display="none";$("hvLabel").textContent="Haz clic para seleccionar el PDF";hideEl("hvBadge");}
+  if(data["FOTOGRAFIA"]?.startsWith("http")){
+    $("fotoPrev").src=data["FOTOGRAFIA"];$("fotoPrev").style.display="block";
+    $("fotoLabel").textContent=docDirector+" (foto actual)";setBadge("fotoBadge","Guardada en Drive","ok");
+  }else{
+    $("fotoPrev").style.display="none";$("fotoLabel").textContent="Haz clic para seleccionar una foto";hideEl("fotoBadge");
+  }
+  if(data["HOJA_DE_VIDA"]?.startsWith("http")){
+    $("pdfLink").href=data["HOJA_DE_VIDA"];$("pdfLinkRow").style.display="flex";
+    $("hvLabel").textContent=docDirector+" (HV actual)";setBadge("hvBadge","Guardada en Drive","ok");
+  }else{
+    $("pdfLinkRow").style.display="none";$("hvLabel").textContent="Haz clic para seleccionar el PDF";hideEl("hvBadge");
+  }
   $("profileCard").style.display="block";$("fotoFile").value="";$("hvFile").value="";
   setTimeout(()=>$("profileCard").scrollIntoView({behavior:"smooth",block:"start"}),100);
 }
@@ -280,32 +292,40 @@ async function guardar(){
   const docActual=$("f_DOCUMENTO").value.trim()||docDirector;
   hideEl("saveMsg");loader("saveLoad",true);$("saveBtn").disabled=true;
 
+  // ── Subir fotografía ──────────────────────────────────────
   const fotoFile=$("fotoFile").files[0];
   if(fotoFile){
-    $("saveLbl").textContent="Enviando fotografía...";
+    $("saveLbl").textContent="Subiendo fotografía...";
     try{
-      const r=await encolarArchivo(fotoFile,"subirFoto",docActual,filaActual,"fotoBadge","foto");
-      if(r.ok){
-        const url=await esperarArchivo(docActual,"foto","fotoBadge");
-        if(url){$("f_FOTOGRAFIA").value=url;$("fotoPrev").src=url;$("fotoPrev").style.display="block";setBadge("fotoBadge","Guardada en Drive ✓","ok");setAvatar($("f_NOMBRE_DIRECTOR").value,url);}
-        else setBadge("fotoBadge","En cola — se procesará en segundos","waiting");
-      }else setBadge("fotoBadge","Error: "+(r.msg||"no se pudo enviar"),"err");
-    }catch(e){setBadge("fotoBadge","Error al enviar foto","err");}
+      const r=await subirArchivo(fotoFile,"subirFoto",docActual,filaActual,"fotoBadge","foto");
+      if(r.ok && r.url){
+        $("f_FOTOGRAFIA").value=r.url;
+        $("fotoPrev").src=r.url;$("fotoPrev").style.display="block";
+        setBadge("fotoBadge","Guardada en Drive ✓","ok");
+        setAvatar($("f_NOMBRE_DIRECTOR").value,r.url);
+      }else{
+        setBadge("fotoBadge","Error: "+(r.msg||"no se pudo subir"),"err");
+      }
+    }catch(e){setBadge("fotoBadge","Error al subir foto","err");}
   }
 
+  // ── Subir hoja de vida ────────────────────────────────────
   const hvFile=$("hvFile").files[0];
   if(hvFile){
-    $("saveLbl").textContent="Enviando hoja de vida...";
+    $("saveLbl").textContent="Subiendo hoja de vida...";
     try{
-      const r=await encolarArchivo(hvFile,"subirHV",docActual,filaActual,"hvBadge","hv");
-      if(r.ok){
-        const url=await esperarArchivo(docActual,"hv","hvBadge");
-        if(url){$("f_HOJA_DE_VIDA").value=url;$("pdfLink").href=url;$("pdfLinkRow").style.display="flex";setBadge("hvBadge","Guardada en Drive ✓","ok");}
-        else setBadge("hvBadge","En cola — se procesará en segundos","waiting");
-      }else setBadge("hvBadge","Error: "+(r.msg||"no se pudo enviar"),"err");
-    }catch(e){setBadge("hvBadge","Error al enviar PDF","err");}
+      const r=await subirArchivo(hvFile,"subirHV",docActual,filaActual,"hvBadge","hv");
+      if(r.ok && r.url){
+        $("f_HOJA_DE_VIDA").value=r.url;
+        $("pdfLink").href=r.url;$("pdfLinkRow").style.display="flex";
+        setBadge("hvBadge","Guardada en Drive ✓","ok");
+      }else{
+        setBadge("hvBadge","Error: "+(r.msg||"no se pudo subir"),"err");
+      }
+    }catch(e){setBadge("hvBadge","Error al subir PDF","err");}
   }
 
+  // ── Guardar campos de texto en Sheets ────────────────────
   $("saveLbl").textContent="Guardando en Google Sheets...";
   const campos={};
   CAMPOS.forEach(c=>{const el=$("f_"+c);if(el)campos[c]=el.value.trim();});
@@ -313,9 +333,19 @@ async function guardar(){
     const res=await fetch(GAS+"?action=actualizar&fila="+filaActual+"&campos="+encodeURIComponent(JSON.stringify(campos)));
     const json=await res.json();
     loader("saveLoad",false);$("saveBtn").disabled=false;$("saveLbl").textContent="Guardando...";
-    if(json.ok){showMsg("saveMsg","Perfil actualizado correctamente en Google Sheets.","ok");$("pName").textContent=campos["NOMBRE_DIRECTOR"]||"Sin nombre";$("pSub").textContent=campos["CORREO_DIRECTOR"]||"";setAvatar(campos["NOMBRE_DIRECTOR"],campos["FOTOGRAFIA"]);docDirector=docActual;}
-    else showMsg("saveMsg","No se pudo guardar. Intenta de nuevo.","err");
-  }catch(e){loader("saveLoad",false);$("saveBtn").disabled=false;$("saveLbl").textContent="Guardando...";showMsg("saveMsg","Error de conexión al guardar.","err");}
+    if(json.ok){
+      showMsg("saveMsg","Perfil actualizado correctamente ✓","ok");
+      $("pName").textContent=campos["NOMBRE_DIRECTOR"]||"Sin nombre";
+      $("pSub").textContent=campos["CORREO_DIRECTOR"]||"";
+      setAvatar(campos["NOMBRE_DIRECTOR"],campos["FOTOGRAFIA"]);
+      docDirector=docActual;
+    }else{
+      showMsg("saveMsg","No se pudo guardar. Intenta de nuevo.","err");
+    }
+  }catch(e){
+    loader("saveLoad",false);$("saveBtn").disabled=false;$("saveLbl").textContent="Guardando...";
+    showMsg("saveMsg","Error de conexión al guardar.","err");
+  }
 }
 
 $("qInput").addEventListener("keydown",e=>{if(e.key==="Enter")buscar();});
