@@ -139,15 +139,15 @@
 
 <div class="page">
   <div class="hero">
-    <h1>Banco de Directores</h1>
-    <p>Consulta, actualiza o registra tu información en el sistema institucional de la maestría.</p>
+    <h1>Banco de Directores/Codirectores/Jurados</h1>
+    <p>Consulta, actualiza o registra tu información en el Banco de Directores/Codirectores/Jurados de la Maestría.</p>
   </div>
 
   <!-- ── Búsqueda ── -->
   <div class="card">
     <span class="search-label">Ingresa tu documento, código o correo institucional</span>
     <div class="search-row">
-      <input type="text" id="qInput" placeholder="Ej: 12345678 · U00001 · director@ufps.edu.co" />
+      <input type="text" id="qInput" placeholder="Ej: 12345678" />
       <button class="btn btn-blue" id="searchBtn" onclick="buscar()">Buscar</button>
     </div>
     <div id="sLoad" class="lrow"><span class="spinner"></span> Consultando...</div>
@@ -155,11 +155,11 @@
 
     <!-- Bloque "No encontrado" -->
     <div class="not-found-box" id="notFoundBox">
-      <p>No se encontró ningún director con <strong id="notFoundQuery"></strong> en el sistema.<br>
-      Si eres director de la Maestría TIC y aún no estás registrado, puedes crear tu perfil ahora.</p>
+      <p>No se encontró ningún director/codirector/jurado con <strong id="notFoundQuery"></strong> en el sistema.<br>
+      Si eres director/codirector/jurado de la Maestría TIC y aún no estás registrado en el Banco, puedes crear tu perfil ahora.</p>
       <button class="btn btn-orange" onclick="abrirRegistro()">
         <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:white"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"/></svg>
-        Registrarme como director
+        Registrarme como director/codirector/jurado
       </button>
     </div>
   </div>
@@ -176,9 +176,9 @@
     <div class="phead">
       <div class="ava" id="avaDiv"><span>--</span></div>
       <div>
-        <div class="pname" id="pName">Nuevo director</div>
+        <div class="pname" id="pName">Nuevo director/codirector/jurado</div>
         <div class="psub" id="pSub">Completa el formulario para registrarte</div>
-        <span class="badge" id="modeBadge">Director de Maestría · UFPS</span>
+        <span class="badge" id="modeBadge">Director/Codirector/Jurado de Maestría · UFPS</span>
       </div>
     </div>
 
@@ -465,7 +465,7 @@ function cargarPerfil(data, fila) {
 
   $("modeBanner").style.display = "none";
   $("modeBadge").className      = "badge";
-  $("modeBadge").textContent    = "Director de Maestría · UFPS";
+  $("modeBadge").textContent    = "Director/Codirector/Jurado de Maestría · UFPS";
   $("saveBtnLabel").textContent = "Guardar cambios";
   // En modo edición la política ya fue aceptada previamente — marcar y habilitar
   $("chkPolitica").checked = true;
@@ -595,7 +595,7 @@ async function guardar() {
         docDirector  = docActual;
         $("modeBanner").style.display = "none";
         $("modeBadge").className      = "badge";
-        $("modeBadge").textContent    = "Director de Maestría · UFPS";
+        $("modeBadge").textContent    = "Director/Codirector/Jurado de Maestría · UFPS";
         $("saveBtnLabel").textContent = "Guardar cambios";
         $("pName").textContent = campos["NOMBRE_DIRECTOR"] || "Sin nombre";
         $("pSub").textContent  = campos["CORREO_DIRECTOR"] || "";
